@@ -3,7 +3,7 @@ import { TextField } from '@mui/material';
 import { FC } from 'react';
 import { IReactHookFormTextFieldProps } from '../types/form-types';
 
-const ReactHookFormTextField: FC<IReactHookFormTextFieldProps> = ({ label, name }: IReactHookFormTextFieldProps) => {
+const ReactHookFormTextField: FC<IReactHookFormTextFieldProps> = ({ label, name, type }: IReactHookFormTextFieldProps) => {
     const {
         register,
         formState: { errors },
@@ -13,6 +13,7 @@ const ReactHookFormTextField: FC<IReactHookFormTextFieldProps> = ({ label, name 
         <TextField
             label={label}
             variant="outlined"
+            type={type}
             error={!!errors[name]}
             helperText={errors[name]?.message ?? ''}
             fullWidth

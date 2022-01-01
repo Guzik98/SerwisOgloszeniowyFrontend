@@ -13,6 +13,7 @@ export type IFormRegisterProps = {
 export type IReactHookFormTextFieldProps ={
     label: string;
     name: string;
+    type?: string
 }
 
 

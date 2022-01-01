@@ -52,7 +52,7 @@ const Register: FC = () => {
                     <form className='form' onSubmit={methods.handleSubmit(submit)}>
                         <ReactHookFormTextField label="Name" name="name" />
                         <ReactHookFormTextField label="Email" name="email" />
-                        <ReactHookFormTextField label="Password" name="password" />
+                        <ReactHookFormTextField label="Password" name="password" type="password" />
                         <SubmitButtonStyled type="submit" variant="contained" color="primary">
                             SIGN UP
                         </SubmitButtonStyled>

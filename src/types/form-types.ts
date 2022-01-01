@@ -1,17 +1,18 @@
-import { UseFormReturn } from 'react-hook-form';
 
 export type IFormLoginProps = {
     email: string;
     password: string;
 }
 
-export type IReactHookFormTextFieldProps = {
-    methods: UseFormReturn;
+export type IFormRegisterProps = {
+    name: string;
+    email: string;
+    password: string;
+}
+
+export type IReactHookFormTextFieldProps ={
     label: string;
     name: string;
 }
 
-export type ReactHookFormTextFieldContainerProps = {
-    name: string;
-    label: string;
-}
+

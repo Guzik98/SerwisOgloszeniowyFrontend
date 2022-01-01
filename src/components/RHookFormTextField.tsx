@@ -1,11 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { TextField } from '@mui/material';
 import { FC } from 'react';
-
-interface IReactHookFormTextFieldProps {
-    label: string;
-    name: string;
-}
+import { IReactHookFormTextFieldProps } from '../types/form-types';
 
 const ReactHookFormTextField: FC<IReactHookFormTextFieldProps> = ({ label, name }: IReactHookFormTextFieldProps) => {
     const {

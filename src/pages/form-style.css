@@ -1,0 +1,102 @@
+.form-root {
+  height: inherit;
+  width: inherit;
+  background-color: #434e5e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-root .form-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: auto;
+  will-change: transform;
+  max-width: 480px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 5px;
+  background-color: #edf4ff;
+}
+.form-root .form-content::-webkit-scrollbar {
+  width: 12px;
+}
+.form-root .form-content::-webkit-scrollbar-thumb {
+  background-color: #adafb4;
+  border-radius: 20px;
+  height: 20px;
+}
+.form-root .form-content .form-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: fit-content;
+}
+.form-root .form-content .form-header-content .form-header {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.form-root .form-content .form {
+  display: flex;
+  flex-direction: column;
+}
+.form-root .form-content .form .name-level {
+  display: flex;
+  flex-direction: row;
+}
+.form-root .form-content .form .name-level .name-small {
+  margin-right: 10px;
+}
+.form-root .form-content .form .name-level .name {
+  width: 400px;
+  margin-right: 10px;
+}
+.form-root .form-content .form .name-level .level-big {
+  width: 200px;
+  margin-right: 20px;
+}
+.form-root .form-content .form .name-level .level {
+  margin-right: 20px;
+}
+.form-root .form-content .form .name-level .delete {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.form-root .form-content .form-error {
+  color: #ea2929;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.form-root .form-content .form-control-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.autocomplete-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+.autocomplete-row .circle {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  margin-right: 10px;
+  align-items: center;
+  justify-content: center;
+  text-transform: none;
+  line-height: 35px;
+  border-radius: 30px;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+}
+.autocomplete-row .circle:hover {
+  box-shadow: 0 0 0 5px #e4e8f0;
+  color: white;
+  fill: white;
+}
+
+/*# sourceMappingURL=form-style.css.map */

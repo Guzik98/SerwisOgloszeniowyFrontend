@@ -20,11 +20,11 @@ function App() {
     return (
         <div className="App">
             <Routes>
-                <Route path="/" element={<MainPage/>} />
+                <Route path="/*" element={<MainPage/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/register" element={<Register/>} />
                 <Route element={<RequireAuth/>} >
-                    <Route path="/postoffer" element={<PostOffer/>} />
+                    <Route path="/postoffer/*" element={<PostOffer/>} />
                 </Route>
             </Routes>
         </div>

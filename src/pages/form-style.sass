@@ -6,21 +6,51 @@
   justify-content: center
   align-items: center
   .form-content
+    display: flex
+    flex-direction: column
+    position: relative
+    overflow-y: auto
+    will-change: transform
     max-width: 480px
     width: 100%
     padding: 30px
     border-radius: 5px
     background-color: #edf4ff
+    &::-webkit-scrollbar
+      width: 12px
+    &::-webkit-scrollbar-thumb
+      background-color: rgb(173, 175, 180)
+      border-radius: 20px
+      height: 20px
     .form-header-content
       display: flex
       flex-direction: column
       align-items: flex-start
+      height: fit-content
       .form-header
         margin-top: 12px
         margin-bottom: 12px
     .form
       display: flex
       flex-direction: column
+      .name-level
+        display: flex
+        flex-direction: row
+        .name-small
+          margin-right: 10px
+        .name
+          width: 400px
+          margin-right: 10px
+        .level-big
+          width: 200px
+          margin-right: 20px
+        .level
+          margin-right: 20px
+        .delete
+          display: flex
+          justify-content: flex-end
+          align-items: center
+
     .form-error
       color: #ea2929
       margin-bottom: 10px
@@ -29,3 +59,25 @@
     .form-control-area
       display: flex
       flex-direction: column
+.autocomplete-row
+  display: flex
+  flex-direction: row
+  width: 100%
+  align-items: center
+  .circle
+    width: 35px
+    height: 35px
+    display: flex
+    margin-right: 10px
+    align-items: center
+    justify-content: center
+    text-transform: none
+    line-height: 35px
+    border-radius: 30px
+    position: relative
+    text-decoration: none
+    cursor: pointer
+    &:hover
+      box-shadow: 0 0 0 5px #e4e8f0
+      color: rgb(255, 255, 255)
+      fill: rgb(255, 255, 255)

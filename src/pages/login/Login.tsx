@@ -3,13 +3,14 @@ import { SubmitHandler, FormProvider, useForm } from 'react-hook-form';
 import { string, object } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@mui/material';
-import { IFormLoginProps } from '../../types/form-types';
-import ReactHookFormTextField from '../../components/RHookFormTextField';
+import ReactHookFormTextField from '../../common/components/RHookFormTextField';
 import '../form-style.sass';
 import {  loginRequest } from '../../services/login-request';
-import { SubmitButtonStyled } from '../../component-styles/SubmitButton';
+import { SubmitButtonStyled } from '../../common/component-styles/SubmitButton';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
+import { IFormLoginProps } from '../../types/forms/IFormLoginProps';
+import Template from '../Template';
 
 const formSchema = object({
     email: string().email().required('Email is required'),
@@ -38,37 +39,29 @@ const Login: FC = () => {
     },[errorMessageFromBackend])
 
     return (
-        <div className='form-root' >
-            <div className="form-content">
-                <div className='form-header-content'>
-                    <h1 className="form-header">
-                        Join us!
-                    </h1>
-                    <p>
-                        Fill in your email and password to sign in.
-                    </p>
-                </div>
-                {errorMessageFromBackend &&
-                <div className="form-error">
-                    {errorMessageFromBackend}
-                </div>
-                }
-                <FormProvider {...methods}>
-                    <form className='form' onSubmit={methods.handleSubmit(submit)}>
-                        <ReactHookFormTextField label="Email" name="email" />
-                        <ReactHookFormTextField label="Password" name="password" type="password" />
-                        <SubmitButtonStyled type="submit" variant="contained" color="primary">
-                            SIGN UP
-                        </SubmitButtonStyled>
-                    </form>
-                </FormProvider>
-                <Link to={'/register'}>
-                    <Button>
-                        DON &apos; T HAVE AN ACCOUNT? SIGN UP NOW!
-                    </Button>
-                </Link>
-            </div>
-        </div>
+        <Template header={'Join us!'}  p ={'Fill in your email and password to sign in.'}>
+          <>
+              {errorMessageFromBackend &&
+              <div className="form-error">
+                  {errorMessageFromBackend}
+              </div>
+              }
+              <FormProvider {...methods}>
+                  <form className='form' onSubmit={methods.handleSubmit(submit)}>
+                      <ReactHookFormTextField label="Email" name="email" />
+                      <ReactHookFormTextField label="Password" name="password" type="password" />
+                      <SubmitButtonStyled type="submit" variant="contained" color="primary">
+                          SIGN UP
+                      </SubmitButtonStyled>
+                  </form>
+              </FormProvider>
+              <Link to={'/register'}>
+                  <Button>
+                      DON &apos; T HAVE AN ACCOUNT? SIGN UP NOW!
+                  </Button>
+              </Link>
+          </>
+        </Template>
     );
 };
 

@@ -1,19 +1,12 @@
-import React, { FC } from 'react';
-import { useAuth } from '../../AuthContext';
-import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
+import React from 'react';
+import Header from './header/Header';
+import FilterBar from './filter-bar/FilterBar';
 
-const MainPage: FC = () => {
-    const { loggedIn, username } = useAuth();
+const MainPage = () => {
     return (
-        <div>
-            {loggedIn}
-            {username}
-            <Link to={'/postoffer'}>
-                <Button>
-                    DON &apos; T HAVE AN ACCOUNT? SIGN UP NOW!
-                </Button>
-            </Link>
+        <div className="main-page" style={{ width: '100vw', height: '100vh' }}>
+            <Header/>
+            <FilterBar/>
         </div>
     );
 };

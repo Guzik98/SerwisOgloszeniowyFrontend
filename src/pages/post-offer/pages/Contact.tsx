@@ -40,8 +40,8 @@ const Contact = () => {
         <Template header={'Contact'}>
             <FormProvider {...methods}>
                 <form className='form' onSubmit={methods.handleSubmit(submit)}>
-                    <ReactHookFormTextField label="Email" name="email" />
-                    <ReactHookFormTextField label="Phone number" name="phone_number" type="number" />
+                    <ReactHookFormTextField label="Email" name="email" required={true} />
+                    <ReactHookFormTextField label="Phone number" name="phone_number" type="number" required={true} />
                     <ReactHookFormTextField label="Github" name="github_url" />
                     <ReactHookFormTextField label="Linkedin" name="linkedin_url" />
                     <SubmitButtonStyled type="submit" variant="contained" color="primary">

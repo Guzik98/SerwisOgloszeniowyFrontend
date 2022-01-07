@@ -40,12 +40,9 @@ const Address = () => {
         <Template header={'Address'}>
             <FormProvider {...methods}>
                 <form className='form' onSubmit={methods.handleSubmit(submit)}>
-                    <ReactHookFormTextField label="Street" name="street" />
-                    <ReactHookFormTextField label="City" name="city" />
-                    <RHookFormSelect
-                        label='Country code'
-                        name='country_code'
-                        defaultValue='PL'>
+                    <ReactHookFormTextField label="Street" name="street" required={true} />
+                    <ReactHookFormTextField label="City" name="city" required={true} />
+                    <RHookFormSelect label='Country code' name='country_code' defaultValue='PL'>
                         {countryCodeInput.map((item) =>
                             <MenuItem key={item.label} value={item.value}>{item.value}</MenuItem>
                         )}

@@ -63,9 +63,9 @@ const Education = () => {
                             <h4>
                                 Education {`${index + 1}`}
                             </h4>
-                            <ReactHookFormTextField2 label="School name" name={`education.${index}.school_name`} index={index}/>
-                            <ReactHookFormTextField2 label="Degree" name={`education.${index}.degree`} index={index} />
-                            <ReactHookFormTextField2 label="Area" name={`education.${index}.area`} index={index} />
+                            <ReactHookFormTextField2 label="School name" name={`education.${index}.school_name`} index={index} required={true}/>
+                            <ReactHookFormTextField2 label="Degree" name={`education.${index}.degree`} index={index} required={true} />
+                            <ReactHookFormTextField2 label="Area" name={`education.${index}.area`} index={index} required={true} />
                             <Button onClick={() => remove(index)} > remove </Button>
                         </div>
 

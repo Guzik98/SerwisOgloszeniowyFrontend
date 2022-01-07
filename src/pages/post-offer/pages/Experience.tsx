@@ -61,9 +61,9 @@ const Experience = () => {
                             <h4>
                                 Job {`${index + 1}`}
                             </h4>
-                            <ReactHookFormTextField2 label="Employer" name={`experience.${index}.company_name`} index={index}/>
-                            <ReactHookFormTextField2 label="Job title" name={`experience.${index}.job_title`} index={index} />
-                            <ReactHookFormTextField2 label="Description" name={`experience.${index}.description`} index={index} rows={4} />
+                            <ReactHookFormTextField2 label="Employer" name={`experience.${index}.company_name`} index={index} required={true}/>
+                            <ReactHookFormTextField2 label="Job title" name={`experience.${index}.job_title`} index={index} required={true} />
+                            <ReactHookFormTextField2 label="Description" name={`experience.${index}.description`} index={index} rows={4} required={true} />
                             <Button onClick={() => remove(index)} > remove </Button>
                         </div>
                     )}

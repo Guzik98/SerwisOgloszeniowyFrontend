@@ -63,26 +63,28 @@ const Programing = () => {
             <FormProvider {...methods}>
                 <form className='form' onSubmit={methods.handleSubmit(submit)} >
                     <div className='row'>
-                        <RHookFormSelect
-                            label='Main technology'
-                            name='marker_icon'
-                            defaultValue='java'>
-                            {programingLanguageIconArray.map((item) =>
-                                <MenuItem
-                                    key={item.name}
-                                    value={item.value}
-                                >
-                                    <div className="autocomplete-row">
-                                        <div className="circle">
-                                            {item.icon}
+                        <div className='main-tech'>
+                            <RHookFormSelect
+                                label='Main technology'
+                                name='marker_icon'
+                                defaultValue='java'>
+                                {programingLanguageIconArray.map((item) =>
+                                    <MenuItem
+                                        key={item.name}
+                                        value={item.value}
+                                    >
+                                        <div className="autocomplete-row">
+                                            <div className="circle">
+                                                {item.icon}
+                                            </div>
+                                            <div className="tech-name">
+                                                {item.name}
+                                            </div>
                                         </div>
-                                        <div className="tech-name">
-                                            {item.name}
-                                        </div>
-                                    </div>
-                                </MenuItem>
-                            )}
-                        </RHookFormSelect>
+                                    </MenuItem>
+                                )}
+                            </RHookFormSelect>
+                        </div>
                         <RHookFormSelect
                             label='Experience'
                             name='experience_level'
@@ -102,7 +104,7 @@ const Programing = () => {
                         <div key={id} className = 'education'>
                             <div className='name-level'>
                                 <div className='name-small'>
-                                    <ReactHookFormTextField2 label="Language" name={`language.${index}.name`} index={index}/>
+                                    <ReactHookFormTextField2 label="Language" name={`language.${index}.name`} index={index} required={true}/>
                                 </div>
                                 <div className='level-big'>
                                     <ReactHookFormTextField2 label="Level" name={`language.${index}.level`} index={index} defaultValue={getValues(`language.${index}.level`)} select={true} >

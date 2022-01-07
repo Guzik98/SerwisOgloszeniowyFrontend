@@ -11,7 +11,6 @@ type TemplateType = {
 const Template = ({ header, p , children}: TemplateType) => {
     const size: ScreenSize = useWindowSize();
     const style = {
-        // minHeight: size.height - 200,
         maxHeight: size.height - 200,
     };
 

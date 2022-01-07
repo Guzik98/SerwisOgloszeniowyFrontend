@@ -1,0 +1,34 @@
+.filter-bar {
+  display: flex;
+  flex-direction: column;
+  height: 59px;
+  padding: 14px 15px 10px;
+  margin-bottom: 12px;
+  justify-content: stretch;
+}
+@media (max-width: 1024.95px) {
+  .filter-bar {
+    padding-top: 0;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    overflow: hidden;
+  }
+}
+.filter-bar .filter-bar-elements {
+  display: flex;
+  padding-left: 4px;
+  flex: 1 1 0;
+  align-items: flex-start;
+  height: 59px;
+}
+@media (max-width: 1024.95px) {
+  .filter-bar .filter-bar-elements {
+    min-width: 100%;
+    margin-bottom: -30px;
+    padding: 0 10px 30px;
+    overflow-y: auto;
+  }
+}
+
+/*# sourceMappingURL=filter-bar.css.map */

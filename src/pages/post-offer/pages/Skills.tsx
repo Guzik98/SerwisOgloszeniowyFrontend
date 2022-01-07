@@ -63,7 +63,7 @@ const Skills = () => {
                         <div key={id} className = 'education'>
                             <div className='name-level'>
                                 <div className='name'>
-                                    <ReactHookFormTextField2 label="Skill name" name={`skills.${index}.name`} index={index}/>
+                                    <ReactHookFormTextField2 label="Skill name" name={`skills.${index}.name`} index={index} required={true}/>
                                 </div>
                                 <div className='level'>
                                     <ReactHookFormTextField2 label="Level" name={`skills.${index}.level`} index={index} defaultValue={getValues(`skills.${index}.level`)} select={true}>

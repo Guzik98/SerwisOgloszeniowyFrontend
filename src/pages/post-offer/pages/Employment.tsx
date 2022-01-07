@@ -131,8 +131,8 @@ const Employment = () => {
                             </ReactHookFormTextField2>
                             { !check[index] &&
                             <>
-                                <ReactHookFormTextField3 label="Salary from" name={`employment_type.${index}.salary.from`} type="number" index={index}/>
-                                <ReactHookFormTextField3 label="Salary to" name={`employment_type.${index}.salary.to`}  type="number" index={index}/>
+                                <ReactHookFormTextField3 label="Salary from" name={`employment_type.${index}.salary.from`} type="number" index={index} required={true}/>
+                                <ReactHookFormTextField3 label="Salary to" name={`employment_type.${index}.salary.to`}  type="number" index={index} required={true}/>
                             </>
                             }
                             <FormControlLabel

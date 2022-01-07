@@ -40,6 +40,15 @@
   display: flex;
   flex-direction: column;
 }
+.form-root .form-content .form .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.form-root .form-content .form .row .main-tech {
+  width: 100%;
+  margin-right: 10px;
+}
 .form-root .form-content .form .name-level {
   display: flex;
   flex-direction: row;
@@ -76,12 +85,12 @@
 .autocomplete-row {
   display: flex;
   flex-direction: row;
-  width: 100%;
   align-items: center;
+  justify-content: center;
 }
 .autocomplete-row .circle {
-  width: 35px;
-  height: 35px;
+  width: 23px;
+  height: 23px;
   display: flex;
   margin-right: 10px;
   align-items: center;

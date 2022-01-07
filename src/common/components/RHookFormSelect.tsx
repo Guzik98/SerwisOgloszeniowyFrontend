@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { IReactHookFormSelectProps } from '../../types/forms/buttons/IReactHookFormSelectProps';
 import { useFormContext } from 'react-hook-form';
 import { TextField } from '@mui/material';
+import { IReactHookFormTextFieldProps } from '../../types/forms/buttons/ReactHookFormTextFieldProps';
 
 
-export const RHookFormSelect: FC<IReactHookFormSelectProps> = ({ label, name, defaultValue, children }: IReactHookFormSelectProps ) => {
+export const RHookFormSelect: FC<IReactHookFormTextFieldProps> = ({ label, name, defaultValue, children }: IReactHookFormTextFieldProps ) => {
 
     const { register } = useFormContext();
 

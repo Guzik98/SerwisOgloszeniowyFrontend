@@ -48,9 +48,9 @@ const PersonalInfo = () => {
         <Template header={'Personal Info'}>
             <FormProvider {...methods}>
                 <form className='form' onSubmit={methods.handleSubmit(submit)}>
-                    <ReactHookFormTextField label="Name" name="name" />
-                    <ReactHookFormTextField label="Surname" name="surname" />
-                    <ReactHookFormTextField label="Short description" name="shortDescription" multiline={true} rows={4} />
+                    <ReactHookFormTextField label="Name" name="name" required={true} />
+                    <ReactHookFormTextField label="Surname" name="surname" required={true} />
+                    <ReactHookFormTextField label="Short description" name="shortDescription" multiline={true} rows={4} required={true} />
                     <TextField variant="outlined" margin="dense" label="Photo" type="file"
                                fullWidth   InputLabelProps={{ shrink: true }} onChange={(e) => { handleChangePhoto(e)}} />
                     <SubmitButtonStyled type="submit" variant="contained" color="primary">

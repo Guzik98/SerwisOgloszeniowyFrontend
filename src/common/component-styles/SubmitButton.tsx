@@ -1,4 +1,4 @@
-import { Button, Select, styled } from '@mui/material';
+import { Button, Divider, Select, styled } from '@mui/material';
 
 export const SubmitButtonStyled = styled(Button)`
   width: 100%;

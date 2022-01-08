@@ -22,17 +22,26 @@
       padding-right: 0
       justify-content: space-between
     .logo-border
-       margin: 1px -1px -1px 1px
-       @media(max-width: 1024.95px)
-        width: 150px
-       .logo-button
+      color: black
+      font-size: 16px
+      font-weight: 700
+      margin-right: 25px
+      @media(max-width: 1024.95px)
+      width: 150px
+      .logo-button
+        white-space: nowrap
         height: 25px
-        display: flex
-        &:hover
-          cursor: pointer
+      &:hover
+        cursor: pointer
+    .right-side
+      color: #99A1AB
+      font-size: 0.875rem
+      display: flex
+      justify-content: flex-start
     .left-end
       display: flex
       justify-content: flex-end
+      align-items: center
   .divider
     margin: 0 12px
     width: 1px

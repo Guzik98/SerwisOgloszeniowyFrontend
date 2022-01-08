@@ -13,13 +13,10 @@ export const SubmitButtonStyled = styled(Button)`
   border-radius: 32px;
   letter-spacing: 0.5px;
   text-transform: none;
+  height: 38px;
   border: 1px solid #E4E8F0;
   @media (max-width: 1025px) {
     height: 30px;
-    margin-top: 10px;
-    margin-bottom: 4px;
-    margin-left: 0;
-    margin-right: 0;
   }
   '&: hover'
       background-color: #f3e9e9;

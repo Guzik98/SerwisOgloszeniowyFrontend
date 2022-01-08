@@ -15,14 +15,18 @@ const Header = () => {
     return (
         <div className="header">
             <div className="header-container">
-                <div className="logo-border">
-                    <a className="logo-button">
-                        Serwis ogloszeniowy
-                    </a>
+                <div className='right-side'>
+                    <div className="logo-border">
+                        <a className="logo-button">
+                            Serwis ogloszeniowy
+                        </a>
+                    </div>
+                    #1 Job Board for IT industry in Poland
                 </div>
                 <div className='left-end'>
                     <StyledDivider  orientation="vertical" flexItem/>
-                    { username ? <SubmitButtonStyled >{username}</SubmitButtonStyled> : <SubmitButtonStyled>Sign IN</SubmitButtonStyled>}
+                    { username ? <SubmitButtonStyled >{username}</SubmitButtonStyled> :
+                        <SubmitButtonStyled onClick={() => navigate('/login')}>Sign IN</SubmitButtonStyled>}
                     <StyledDivider orientation="vertical" flexItem/>
                     <SubmitButtonStyled onClick={() =>  navigate('/postoffer')}>
                         Post a offer

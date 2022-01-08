@@ -17,7 +17,7 @@ const useProviderSettings = () => {
         fromSalary: 0,
         toSalary: 100000,
         employmentType: ContractTypeEnum.ALL,
-        sortBy: 'Latest',
+        sortBy: 'latest',
         withSalary: false
     });
     const [ viewport, setViewport ] = useState<View>({

@@ -1,0 +1,76 @@
+.sort-by-label {
+  margin-right: 8px;
+  color: #99a1ab;
+  text-transform: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sort-by-option {
+  text-transform: none;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: Open Sans, sans-serif;
+}
+@media (max-width: 1024.95px) {
+  .sort-by-option {
+    font-weight: 500;
+    font-size: 12px;
+  }
+}
+
+.sort-by-pop-out-body {
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 1024.95px) {
+  .sort-by-pop-out-body {
+    width: 100%;
+    align-items: center;
+  }
+}
+.sort-by-pop-out-body .btn-border {
+  display: flex;
+}
+@media (max-width: 1025px) {
+  .sort-by-pop-out-body .btn-border .sort-by-link {
+    display: flex;
+    width: inherit;
+  }
+}
+
+.sort-by-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  color: #777777;
+}
+
+.numer-border {
+  font-size: 14px;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  text-align: center;
+  line-height: 24px;
+  background: #ff4081;
+  color: white;
+  margin-left: 0px;
+  margin-right: 5px;
+}
+
+.icon-pad {
+  margin-right: 5px;
+}
+
+.sort-active .MuiButton-root {
+  background: rgba(255, 64, 129, 0.08);
+  border-color: #ff4081;
+}
+.sort-active .MuiButton-label {
+  color: #ff4081 !important;
+}
+
+/*# sourceMappingURL=sortBy.css.map */

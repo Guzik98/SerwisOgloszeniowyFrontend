@@ -30,23 +30,29 @@
   }
 }
 .header .header-container .logo-border {
-  margin: 1px -1px -1px 1px;
-}
-@media (max-width: 1024.95px) {
-  .header .header-container .logo-border {
-    width: 150px;
-  }
+  color: black;
+  font-size: 16px;
+  font-weight: 700;
+  margin-right: 25px;
+  width: 150px;
 }
 .header .header-container .logo-border .logo-button {
+  white-space: nowrap;
   height: 25px;
-  display: flex;
 }
-.header .header-container .logo-border .logo-button:hover {
+.header .header-container .logo-border:hover {
   cursor: pointer;
+}
+.header .header-container .right-side {
+  color: #99A1AB;
+  font-size: 0.875rem;
+  display: flex;
+  justify-content: flex-start;
 }
 .header .header-container .left-end {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 .header .divider {
   margin: 0 12px;

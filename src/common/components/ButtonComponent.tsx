@@ -6,15 +6,14 @@ import { ButtonComponentType } from '../../types/button-component';
 export const useStyles = makeStyles(() =>
     createStyles({
         chose: {
+            whiteSpace: 'nowrap',
             borderRadius: '32px',
             textTransform: 'none',
             fontSize: '12px',
             color: 'rgb(119, 119, 119)',
             background: 'rgb(255, 255, 255)',
             border: '1px solid #E4E8F0',
-            minWidth: '160px',
-            justifyContent: 'space-between',
-            marginTop: 6,
+            margin: 6,
             padding: '0px 16px 0px 16px',
             height: 36,
             '@media (max-width: 1025px)': {
@@ -25,15 +24,14 @@ export const useStyles = makeStyles(() =>
             }
         },
         chosen: {
+            whiteSpace: 'nowrap',
             borderRadius: '32px',
             textTransform: 'none',
             fontSize: '14px',
             color: 'rgb(255, 64, 129)',
             background: 'rgba(255, 64, 129, 0.08)',
             borderColor: 'rgb(255, 64, 129)',
-            minWidth: '160px',
-            justifyContent: 'space-between',
-            marginTop: 6,
+            margin: 6,
             padding: '0px 16px 0px 16px',
             height: 36,
             '@media (max-width: 1025px)': {
@@ -42,6 +40,7 @@ export const useStyles = makeStyles(() =>
             }
         },
         label: {
+
             textTransform: 'none',
             fontWeight: 500,
             fontFamily: 'Open Sans,sans-serif',
@@ -52,14 +51,15 @@ export const useStyles = makeStyles(() =>
 
 
 
-const ButtonComponent = ({ onClick, children, filter, endIcon, startIcon }: ButtonComponentType ): JSX.Element => {
+const ButtonComponent = ({ onClick, children, filter, endIcon, startIcon, role, width,  justifyContent }: ButtonComponentType ): JSX.Element => {
     const classes = useStyles();
-
     return (
          <Button
+             sx={{ minWidth: width, justifyContent: justifyContent }}
              size='small'
              variant='outlined'
-             onClick={() => onClick }
+             onClick={onClick}
+             role={role}
              classes={ filter ? { root: classes.chose } : { root: classes.chosen }}
              endIcon={endIcon}
              startIcon={startIcon}

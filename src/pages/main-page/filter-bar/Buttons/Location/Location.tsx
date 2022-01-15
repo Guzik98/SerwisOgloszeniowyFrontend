@@ -37,7 +37,7 @@ export const useStyles = makeStyles(() =>
             },
         }
     })
-)
+);
 
 const Location = () => {
     const classes = useStyles();
@@ -63,13 +63,13 @@ const Location = () => {
                 onClick={handleClick}
                 justifyContent={'space-between'}
                 role='open-location-pop-out'
-                children={filters.city !== 'All' ? filters.city : 'Location' }
+                childrens={filters.city !== 'All' ? filters.city : 'Location' }
                 endIcon={ size.width > 1025 ? open ? <ExpandLess/> : <ExpandMore/> : <></> }
             />
 
             <MediaQuery maxWidth={1025}>
                 <Dialog
-                    classes={{ root: classes.root}}
+                    classes={{ root: classes.root }}
                     id={id}
                     open={open}
                     fullScreen
@@ -80,7 +80,7 @@ const Location = () => {
             </MediaQuery>
             <MediaQuery minWidth={1025}>
                 <Popover
-                    classes={{ root: classes.root}}
+                    classes={{ root: classes.root }}
                     id={id}
                     open={open}
                     anchorEl={anchorEl}

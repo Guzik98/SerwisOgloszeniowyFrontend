@@ -1,6 +1,6 @@
 export enum ExperienceLevelEnum {
     ALL = 'All',
-    JUNIOR= 'junior',
+    JUNIOR = 'junior',
     MID = 'mid',
     SENIOR = 'senior'
 }

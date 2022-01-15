@@ -10,7 +10,7 @@ const getLocation =  ( address: string, setGeocode: React.Dispatch<React.SetStat
                 longitude: response.data.features[0].geometry.coordinates[0],
                 latitude: response.data.features[0].geometry.coordinates[1]
             });
-        })
+        });
 };
 
 export default getLocation;

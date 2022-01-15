@@ -18,4 +18,4 @@ export const englishSkillInput = [
         label: 'Native', value:'C2'
     },
 
-]
+];

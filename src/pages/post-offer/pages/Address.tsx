@@ -16,15 +16,15 @@ import Template from '../../Template';
 const formSchema = object({
     street: string().required('This field ois required'),
     city: string().required('This field ois required'),
-})
+});
 
 const Address = () => {
     const navigate = useNavigate();
-    const { actions, state } = useStateMachine({ updateOffer })
+    const { actions, state } = useStateMachine({ updateOffer });
 
     const methods = useForm<IFormOfferAddress>({
         resolver: yupResolver(formSchema),
-    })
+    });
 
     const submit: SubmitHandler<IFormOfferAddress> = async (data: IFormOfferAddress) => {
         actions.updateOffer({
@@ -34,14 +34,14 @@ const Address = () => {
             country_code: data.country_code
         });
         navigate('/postoffer/contact');
-    }
+    };
 
     return (
         <Template header={'Address'}>
             <FormProvider {...methods}>
                 <form className='form' onSubmit={methods.handleSubmit(submit)}>
-                    <ReactHookFormTextField label="Street" name="street" required={true} />
-                    <ReactHookFormTextField label="City" name="city" required={true} />
+                    <ReactHookFormTextField label="Street" name="street"  />
+                    <ReactHookFormTextField label="City" name="city" />
                     <RHookFormSelect label='Country code' name='country_code' defaultValue='PL'>
                         {countryCodeInput.map((item) =>
                             <MenuItem key={item.label} value={item.value}>{item.value}</MenuItem>

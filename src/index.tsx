@@ -10,11 +10,11 @@ import { SettingsProvider } from './Settings';
 ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
-          <AuthContextProvider>
-              <SettingsProvider>
+          <SettingsProvider>
+              <AuthContextProvider>
                   <App />
-              </SettingsProvider>
-          </AuthContextProvider>
+              </AuthContextProvider>
+          </SettingsProvider>
       </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

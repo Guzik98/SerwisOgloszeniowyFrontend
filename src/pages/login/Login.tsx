@@ -17,7 +17,6 @@ const formSchema = object({
     password: string().required('Password is required'),
 });
 
-
 const Login: FC = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
@@ -36,7 +35,7 @@ const Login: FC = () => {
             login();
             navigate('/');
         }
-    },[errorMessageFromBackend])
+    }, [errorMessageFromBackend]);
 
     return (
         <Template header={'Join us!'}  p ={'Fill in your email and password to sign in.'}>

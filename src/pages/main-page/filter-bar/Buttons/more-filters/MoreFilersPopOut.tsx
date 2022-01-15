@@ -8,7 +8,7 @@ import { Button, DialogActions, DialogContent, Divider, IconButton, Slider } fro
 import { employmentBtn, seniorityBtn } from './inputs';
 import ButtonComponent from '../../../../../common/components/ButtonComponent';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import './moreFilters.sass'
+import './moreFilters.sass';
 
 const useStylesBtn = makeStyles({
     label: {
@@ -52,7 +52,7 @@ const useStylesBtn = makeStyles({
 
 const MoreFilersPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
     const classesBtn = useStylesBtn();
-    const { filters, setFilters} = useSettings();
+    const { filters, setFilters } = useSettings();
     const [value, setValue] = React.useState<number[]>([filters.fromSalary, filters.toSalary]);
 
     const handleChange = (event: any, newValue: number | number[]) => {
@@ -64,14 +64,14 @@ const MoreFilersPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
     }
 
     const submit = () => {
-        setFilters({...filters, fromSalary: value[0], toSalary: value[1]});
+        setFilters({ ...filters, fromSalary: value[0], toSalary: value[1] });
         if (handleClose){
             handleClose();
         }
     };
 
     const clear = () => {
-        setFilters({...filters,
+        setFilters({ ...filters,
             fromSalary: value[0],
             toSalary: value[1],
             employmentType: ContractTypeEnum.ALL,
@@ -124,28 +124,34 @@ const MoreFilersPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
                     Employment Type
                 </div>
 
-                {employmentBtn.map((item) =>
-                    <ButtonComponent
-                        width={'78px'}
-                        justifyContent={'center'}
-                        onClick={() => setFilters({...filters, employmentType: item.value})}
-                        filter={filters.employmentType !== item.value}
-                        children={item.name}
-                    />
-                )}
+                {employmentBtn.map((item) =>{
+                    return (
+                            <ButtonComponent
+                                key={item.value}
+                                width={'78px'}
+                                justifyContent={'center'}
+                                onClick={() => setFilters({ ...filters, employmentType: item.value })}
+                                filter={filters.employmentType !== item.value}
+                                childrens={item.name}
+                            />
+                    );
+                })}
                 <Divider classes={{ root: classesBtn.divider }}/>
                 <div className="label-title">
                     Seniority
                 </div>
-                {seniorityBtn.map((item) =>
-                    <ButtonComponent
-                        width={'78px'}
-                        justifyContent={'center'}
-                       onClick={() => setFilters({...filters, seniority: item.value})}
-                       filter={filters.seniority !== item.value}
-                       children={item.name}
-                    />
-                )}
+                {seniorityBtn.map((item) =>{
+                    return (
+                        <ButtonComponent
+                            key={item.value}
+                            width={'78px'}
+                            justifyContent={'center'}
+                            onClick={() => setFilters({ ...filters, seniority: item.value })}
+                            filter={filters.seniority !== item.value}
+                            childrens={item.name}
+                        />
+                    );
+                })}
             </DialogContent>
             <DialogActions classes={{ root: classesBtn.headerFooter }}>
                 <Button

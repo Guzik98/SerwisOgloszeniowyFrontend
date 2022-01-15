@@ -7,6 +7,5 @@ export type IReactHookFormTextFieldProps2 ={
     defaultValue?: string | number
     select?: boolean,
     children?: JSX.Element[]
-    required?: boolean
     multiline?: boolean
 }

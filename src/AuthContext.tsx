@@ -7,20 +7,22 @@ export const AuthContext = createContext<AuthContextData | null>(null);
 export const useAuthProviderSettings = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [username, setUsername] = useState<string | undefined>();
-    const [iat, setIat] = useState<number | undefined>()
-    const [exp, setExp] = useState<number | undefined>()
+    const [email, setEmail] = useState<string>();
+    // const [iat, setIat] = useState<number | undefined>()
+    // const [exp, setExp] = useState<number | undefined>();
 
     const getLocalStorage = () => {
         setUsername(parseJwt(localStorage.getItem('accessToken') as string).username);
-        setIat(parseJwt(localStorage.getItem('accessToken') as string).iat)
-        setExp(parseJwt(localStorage.getItem('accessToken') as string).exp)
-    }
+        setEmail(parseJwt(localStorage.getItem('accessToken') as string).email);
+        // setIat(parseJwt(localStorage.getItem('accessToken') as string).iat);
+        // setExp(parseJwt(localStorage.getItem('accessToken') as string).exp);
+    };
 
     useEffect(() => {
         // Pull saved login state from localStorage / AsyncStorage
         if (localStorage.getItem('accessToken') !== null){
             setLoggedIn(true);
-            getLocalStorage()
+            getLocalStorage();
         }
     }, []);
 
@@ -37,24 +39,26 @@ export const useAuthProviderSettings = () => {
 
     const login = () => {
         sleep(2000).then(() => {
-            setLoggedIn(true)
-            getLocalStorage()
+            setLoggedIn(true);
+            getLocalStorage();
         });
-    }
+    };
     const logout = () => {
+        console.log('logout');
         sleep(2000).then(() => {
-            setLoggedIn(false)
-            getLocalStorage()
+            setLoggedIn(false);
+            setUsername(undefined);
         });
-    }
+    };
 
     return {
         login,
         loggedIn,
         logout,
-        username
-    }
-}
+        username,
+        email
+    };
+};
 
 export const AuthContextProvider: FC = ({ children }) => {
     const value = useAuthProviderSettings();

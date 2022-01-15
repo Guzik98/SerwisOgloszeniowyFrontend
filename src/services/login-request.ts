@@ -3,17 +3,16 @@ import React from 'react';
 
 export const loginRequest =  ( email: string, password: string,
                              setErrorMessageFromBackend: React.Dispatch<React.SetStateAction<string | undefined>> ) => {
-    const url = 'http://localhost:3000/auth/signin'
-     axios.post(url,{
+    const url = 'http://localhost:3000/auth/signin';
+     axios.post(url,  {
         email: email,
         password: password
     })
     .then( (response) => {
-        console.log(response.data.accessToken);
-        localStorage.setItem('accessToken', response.data.accessToken)
+        localStorage.setItem('accessToken', response.data.accessToken);
         setErrorMessageFromBackend('logged');
     })
     .catch( (error) => {
         setErrorMessageFromBackend(error.response.data.message);
-    })
-}
+    });
+};

@@ -16,7 +16,8 @@ function App() {
             return <Navigate to="/login" />;
         }
         return <Outlet />;
-    }
+    };
+
 
     return (
         <div className="App">

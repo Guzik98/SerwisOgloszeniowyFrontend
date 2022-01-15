@@ -12,8 +12,8 @@ import Template from '../Template';
 const formSchema = object({
     name: string().min(3, 'Name must be at least 3 characters').required('Name is required'),
     email: string().email().required('Email is required'),
-    password: string().min(8,'Password must be at least 8 characters').max(32,'Password must be at most 32 characters').required('Password is required'),
-})
+    password: string().min(8, 'Password must be at least 8 characters').max(32, 'Password must be at most 32 characters').required('Password is required'),
+});
 
 const Register: FC = () => {
     const navigate = useNavigate();
@@ -24,14 +24,14 @@ const Register: FC = () => {
     });
 
     const submit: SubmitHandler<IFormRegisterProps> = async (data: IFormRegisterProps) => {
-        registerRequest(data.name, data.email, data.password, setErrorMessageFromBackend)
+        registerRequest(data.name, data.email, data.password, setErrorMessageFromBackend);
     };
 
     useEffect(() => {
         if (errorMessageFromBackend === 'register'){
-            navigate('/login')
+            navigate('/login');
         }
-    },[errorMessageFromBackend])
+    }, [errorMessageFromBackend]);
 
     return (
         <Template header={'Join us!'} p={'Start looking for new future with us.'}>
@@ -56,7 +56,7 @@ const Register: FC = () => {
                 </SubmitButtonStyled2>
             </>
         </Template>
-    )
+    );
 
 
 };

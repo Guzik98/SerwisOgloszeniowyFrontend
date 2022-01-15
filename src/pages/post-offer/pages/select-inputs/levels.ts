@@ -15,4 +15,4 @@ export const levels = [
         label: 5
     },
 
-]
+];

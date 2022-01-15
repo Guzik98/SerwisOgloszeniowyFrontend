@@ -10,4 +10,4 @@ export const ContractInput = [
     {
         label: 'Mandate contract', value: ContractTypeEnum.MANDATE_CONTRACT
     },
-]
+];

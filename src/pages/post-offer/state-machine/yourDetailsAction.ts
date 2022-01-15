@@ -1,4 +1,4 @@
-import { GlobalState } from "little-state-machine";
+import { GlobalState } from 'little-state-machine';
 import { EducationType } from '../../../types/offer/education';
 import { CertificateType } from '../../../types/offer/certificateType';
 import { ExperienceType } from '../../../types/offer/experience';

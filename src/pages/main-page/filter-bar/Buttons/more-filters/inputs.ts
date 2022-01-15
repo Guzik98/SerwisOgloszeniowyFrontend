@@ -1,4 +1,4 @@
-import { ContractTypeEnum } from "../../../../../enums/contract-enum";
+import { ContractTypeEnum } from '../../../../../enums/contract-enum';
 import { ExperienceLevelEnum } from '../../../../../enums/experience_level';
 
 export const employmentBtn  = [

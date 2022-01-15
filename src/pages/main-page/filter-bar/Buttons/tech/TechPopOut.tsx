@@ -20,16 +20,16 @@ const TechPopOut = ({ handleClose } : HandlePopOut) : JSX.Element => {
             </div>
             <Divider/>
             <div className="tech-pop-out-content">
-                <div onClick={() => setFilters( {...filters, mainTech: 'All'})}
-                     className = {`${ filters.mainTech !== 'All'?  'un-active' : '' }`}
+                <div onClick={() => setFilters( { ...filters, mainTech: 'All' })}
+                     className = {`${ filters.mainTech !== 'All' ?  'un-active' : '' }`}
                 >
                     <AllIcon/>
                 </div>
                 {programingLanguageIconArray.map((item) =>{
                     return (
-                        <div onClick={handleClose} className="tech">
+                        <div onClick={handleClose} className="tech" key={item.value}>
                             <div
-                                onClick={() => {setFilters({ ...filters, mainTech: item.value})}}
+                                onClick={() => {setFilters({ ...filters, mainTech: item.value });}}
                                 className = {`${filters.mainTech !== item.value && filters.mainTech != 'All' ? 'un-active' : '' }` }
                             >
                                 <div
@@ -44,8 +44,8 @@ const TechPopOut = ({ handleClose } : HandlePopOut) : JSX.Element => {
                                 </div>
                             </div>
                         </div>
-                    )}
-                )}
+                    );
+                })}
             </div>
         </>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { array, number, object, string } from 'yup';
 import { useStateMachine } from 'little-state-machine';
 import { updateOffer } from '../state-machine/yourDetailsAction';
@@ -17,35 +17,27 @@ import { red } from '@mui/material/colors';
 const skillsSchema = object({
     name: string().required('this field is required'),
     level: number().required('this field is required'),
-})
+});
 
 const formSchema = object({
     skills: array().of(skillsSchema)
-})
+});
 
 const Skills = () => {
     const navigate = useNavigate();
-    const { actions, state } = useStateMachine({ updateOffer});
+    const { actions, state } = useStateMachine({ updateOffer });
 
     let methods: UseFormReturn<IFormOfferSkills>;
     methods = useForm<IFormOfferSkills>({
-        defaultValues: {
-            skills: [
-                {
-                    name: state.yourDetails.marker_icon,
-                    level: 1
-                }
-            ],
-        },
         resolver: yupResolver(formSchema)
     });
 
-    const { control, getValues } = methods
+    const { control } = methods;
 
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'skills'
-    })
+    });
 
     const submit: SubmitHandler<IFormOfferSkills> = (data: IFormOfferSkills) => {
         actions.updateOffer({
@@ -53,20 +45,23 @@ const Skills = () => {
             skills: data.skills
         });
         navigate('/postoffer/employment');
-    }
+    };
 
+    useEffect(() => {
+        append({ name: state.yourDetails.marker_icon, level: undefined });
+    }, []);
     return (
         <Template header={'Skills'}>
             <FormProvider {...methods}>
                 <form className='form' onSubmit={methods.handleSubmit(submit)} >
-                    {fields.map(({ id}, index) =>
-                        <div key={id} className = 'education'>
+                    {fields.map(( { id }, index) =>
+                        <div key={id} className = 'arrays'>
                             <div className='name-level'>
                                 <div className='name'>
-                                    <ReactHookFormTextField2 label="Skill name" name={`skills.${index}.name`} index={index} required={true}/>
+                                    <ReactHookFormTextField2 label="Skill name" name={`skills.${index}.name`} index={index}/>
                                 </div>
-                                <div className='level'>
-                                    <ReactHookFormTextField2 label="Level" name={`skills.${index}.level`} index={index} defaultValue={getValues(`skills.${index}.level`)} select={true}>
+                                <div className='level-small'>
+                                    <ReactHookFormTextField2 label="Level" name={`skills.${index}.level`} index={index} select={true}>
                                         {levels.map((item) =>
                                             <MenuItem key={item.label} value={item.label}>{item.label}</MenuItem>
                                         )}

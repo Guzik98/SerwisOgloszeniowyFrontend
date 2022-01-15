@@ -21,4 +21,4 @@ export const SubmitButtonStyled = styled(Button)`
   '&: hover'
       background-color: #f3e9e9;
       cursor: pointer;
-`
+`;

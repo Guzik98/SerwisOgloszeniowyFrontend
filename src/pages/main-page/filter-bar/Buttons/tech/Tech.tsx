@@ -21,7 +21,7 @@ const Tech = () => {
             <ButtonComponent
                 onClick={handleClickOpen}
                 filter={filters.mainTech === 'All'}
-                children={filters.mainTech !== 'All' ? filters.mainTech : 'Tech' }
+                childrens={filters.mainTech !== 'All' ? filters.mainTech : 'Tech' }
             />
             <Dialog fullScreen open={open}>
                 <TechPopOut handleClose={handleClose} />

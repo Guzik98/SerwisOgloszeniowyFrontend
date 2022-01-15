@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const sendProfilePhoto = async(data: File):  Promise<string> => {
+export const sendProfilePhoto = async ( data: File ):  Promise<string> => {
 
     const formData = new FormData();
     formData.append('file', data);
@@ -13,6 +13,5 @@ export const sendProfilePhoto = async(data: File):  Promise<string> => {
         }).then((r) => {
         companyLogoUrl = companyLogoUrl + r.data;
     });
-     console.log(companyLogoUrl);
-     return companyLogoUrl
-}
+     return companyLogoUrl;
+};

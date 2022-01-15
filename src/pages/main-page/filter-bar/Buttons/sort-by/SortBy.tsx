@@ -5,7 +5,7 @@ import { createStyles, makeStyles } from '@mui/styles';
 import MediaQuery from 'react-responsive';
 import { Dialog, Popover } from '@mui/material';
 import SortByPopOut from './SortByPopOut';
-import './sortBy.sass'
+import './sortBy.sass';
 import { useWindowSize } from '../../../../../functions/handle-resize';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
@@ -28,7 +28,7 @@ const useStyles = makeStyles(() =>
 const SortBy = () => {
     const { filters } = useSettings();
     const classes = useStyles();
-    const size = useWindowSize()
+    const size = useWindowSize();
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
@@ -48,8 +48,12 @@ const SortBy = () => {
         <>
             <ButtonComponent
                 onClick={handleClick}
-                filter={filters.sortBy === 'Latest'}
-                children={filters.sortBy}
+                height={ size.width > 102 ? '30px' : undefined }
+                filter={ size.width < 1025 ? filters.sortBy == 'Latest' : true }
+                childrens={ size.width > 1025 ?
+                    <span className="sort-by-label">
+                       Sort by: {filters.sortBy}
+                    </span> :  filters.sortBy}
                 endIcon={size.width > 1025 ? open ? <ExpandLess/> : <ExpandMore/> : undefined}
             />
             <MediaQuery maxWidth={1025}>
@@ -59,7 +63,7 @@ const SortBy = () => {
             </MediaQuery>
             <MediaQuery minWidth={1025}>
                 <Popover
-                    classes={{ root: classes.root}}
+                    className={classes.root}
                     id={id}
                     open={open}
                     anchorEl={anchorEl}

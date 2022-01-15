@@ -1,8 +1,7 @@
-import { RoleEnum } from '../enums/role';
 
 export type Token = {
     username: string
-    role : RoleEnum
+    email : string
     iat: number
     exp: number
 };

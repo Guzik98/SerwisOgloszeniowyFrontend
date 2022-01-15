@@ -1,0 +1,213 @@
+.offer-border
+  position: relative
+  width: 100%
+  height: 89px
+  @media(max-width: 1025px)
+    height: 68px
+    margin: 0px 0px
+    width: 99%
+  .offer-border-level2
+    height: 77px
+    display: flex
+    padding: 0
+    text-decoration: none
+    @media (min-width: 1025px)
+      margin: 0px 10px 12px
+    .offer-border-level3
+      width: 100%
+      cursor: pointer
+      height: 64px
+      display: flex
+      padding: 0
+      border-radius: 6px
+      text-decoration: none
+      background-color: rgb(255, 255, 255)
+      overflow: visible
+      @media(min-width: 1025px)
+        height: 77px
+      .logo
+        display: flex
+        flex-basis: 85px
+        align-items: center
+        flex-shrink: 0
+        justify-content: center
+        @media(min-width: 1025px)
+          flex-basis:  125px
+        .logo-border
+          width: 80%
+          height: 85%
+          display: flex
+          align-items: center
+          border-radius: 6px
+          justify-content: center
+          background-color: rgb(255, 255, 255)
+          .image
+            max-width: 60px
+            max-height: 40px
+            @media(min-width: 1025px)
+              max-width: 85px
+      .info
+        display: flex
+        padding: 12px 16px 10px 0
+        flex-grow: 1
+        min-width: 0
+        flex-direction: column
+        @media(min-width: 1025px)
+          padding: 8px 20px 8px 0
+        .top-info
+          display: flex
+          flex-grow: 1
+          min-width: 0
+          align-items: center
+          justify-content: space-between
+          .position-info
+            display: flex
+            flex-grow: 1
+            min-width: 0
+            align-items: flex-start
+            justify-content: space-between
+            .position-text
+              color: rgb(55, 71, 79)
+              overflow: hidden
+              font-size: 14px
+              font-weight: 600
+              white-space: nowrap
+              text-overflow: ellipsis
+              @media(min-width: 1025px)
+                font-size: 16px
+                margin-top: 0
+                padding-right: 5px
+          .salary-info
+            display: flex
+            align-items: center
+            justify-content: space-between
+            @media(min-width: 1025px)
+              justify-content: flex-end
+            .salary-text
+              color: rgb(30, 198, 108)
+              overflow: hidden
+              font-size: 12px
+              line-height: 23px
+              white-space: nowrap
+              text-overflow: ellipsis
+              @media (min-width: 1025px)
+                font-size: 16px
+          .update-info
+            color: rgb(153, 161, 171)
+            height: 16px
+            padding: 0px 5px
+            font-size: 8px
+            line-height: 13px
+            margin-left: 10px
+            white-space: nowrap
+            border-color: rgb(228, 232, 240)
+            border-style: solid
+            border-width: 1px
+            border-radius: 11px
+            background-color: rgb(228, 232, 240)
+            @media (min-width: 1025px)
+              height: 22px
+              padding: 0px 7px
+              font-size: 11px
+              line-height: 20px
+              margin-left: 16px
+        .bottom-info
+          display: flex
+          justify-content: space-between
+          .bottom-info-left
+            color: rgb(153, 161, 171)
+            display: flex
+            overflow: hidden
+            font-size: 10px
+            align-items: center
+            margin-left: 6px
+            white-space: nowrap
+            @media (min-width: 1025px)
+              font-size: 11px
+            .company-name
+              display: none
+              align-items: center
+              @media(min-width: 1025px)
+                display: flex
+              .company-icon
+                width: 14px
+                height: 24px
+                margin-right: 6px
+                fill: currentColor
+            .where-type
+              margin: 0
+              display: flex
+              overflow: hidden
+              align-items: center
+              @media(min-width: 1025px)
+                margin: 0px 12px
+              .salary-text
+                color: rgb(30, 198, 108)
+                overflow: hidden
+                font-size: 12px
+                line-height: 23px
+                white-space: nowrap
+                text-overflow: ellipsis
+              .pointer-icon
+                fill: currentColor
+                margin-right: 4px
+                min-width: 14px
+                min-height: 14px
+              .type
+                color: rgb(255, 64, 129)
+                height: 21px
+                padding: 0 12px
+                font-size: 10px
+                line-height: 21px
+                margin-left: 12px
+                white-space: nowrap
+                border-radius: 11px
+                background-color: rgb(255, 245, 248)
+                @media (max-width: 1025px)
+                  display: none
+              .type-small-screen
+                overflow: hidden
+                text-overflow: ellipsis
+                @media (min-width: 1025px)
+                  display: none
+        .bottom-info-skills
+          flex: 1
+          overflow: hidden
+          display: none
+          align-items: flex-end
+          white-space: nowrap
+          justify-content: flex-end
+          @media(min-width: 1025px)
+            display: flex
+          .skills
+            color: rgb(153, 161, 171)
+            height: 22px
+            display: inline-block
+            padding: 0 7px
+            overflow: hidden
+            font-size: 11px
+            min-width: 1ch
+            line-height: 20px
+            margin-left: 6px
+            white-space: nowrap
+            border-color: rgb(224, 224, 224)
+            border-style: solid
+            border-width: 1px
+            border-radius: 11px
+            text-overflow: ellipsis
+            text-transform: lowercase
+            background-color: rgb(255, 255, 255)
+
+        .bottom-info-where
+          color: rgb(153, 161, 171)
+          display: flex
+          overflow: hidden
+          font-size: 10px
+          align-items: center
+          margin-left: 6px
+          white-space: nowrap
+          .pointer-icon
+            margin-right: 4px
+            max-width: 14px
+
+

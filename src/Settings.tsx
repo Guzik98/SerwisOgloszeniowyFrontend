@@ -1,9 +1,10 @@
-import { createContext, FC, useContext, useState } from 'react';
+import { createContext, FC, useContext, useEffect, useState } from 'react';
 import { OfferType } from './types/offer';
 import { filtersType } from './types/filters';
 import { ExperienceLevelEnum } from './enums/experience_level';
 import { ContractTypeEnum } from './enums/contract-enum';
 import { View } from './types/view';
+import axios from 'axios';
 
 export const SettingsContext = createContext<SettingsContextData | null>(null);
 
@@ -28,6 +29,13 @@ const useProviderSettings = () => {
         zoom: 5,
     });
 
+    useEffect(() => {
+        axios.get('http://localhost:3000/offer')
+            .then((response) => {
+                return setOffers(response.data);
+            });
+    }, []);
+
     return {
         offers,
         setOffers,
@@ -35,7 +43,7 @@ const useProviderSettings = () => {
         setFilters,
         viewport,
         setViewport
-    }
+    };
 };
 
 export const SettingsProvider: FC = ({ children }) => {

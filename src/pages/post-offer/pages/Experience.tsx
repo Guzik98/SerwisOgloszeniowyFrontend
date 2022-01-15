@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { array, object, string } from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useStateMachine } from 'little-state-machine';
@@ -7,9 +7,10 @@ import { FormProvider, SubmitHandler, useFieldArray, useForm } from 'react-hook-
 import { IFormOfferExperience } from '../../../types/forms/post-offer-types/IFormOfferExperience';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ReactHookFormTextField2 from '../../../common/components/RHookFormTextField2';
-import { Button } from '@mui/material';
+import { Button, Checkbox, FormControlLabel } from '@mui/material';
 import { SubmitButtonStyled } from '../../../common/component-styles/SubmitButton';
 import Template from '../../Template';
+import RHookFormDataPicker from '../../../common/components/RHookFormDataPicker';
 
 const expSchema = object({
     company_name: string().required('this field is required'),
@@ -30,12 +31,12 @@ const Experience = () => {
         resolver: yupResolver(formSchema)
     });
 
-    const { control } = methods
+    const { control, setValue } = methods;
 
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'experience',
-    })
+    });
 
     const submit: SubmitHandler<IFormOfferExperience> = (data: IFormOfferExperience) => {
         if ( data.experience?.length === 0 ){
@@ -45,25 +46,55 @@ const Experience = () => {
             ...state.yourDetails,
             experience: data.experience
         });
-        navigate('/postoffer/projects')
+        navigate('/postoffer/projects');
+    };
+
+    const [tillNow, setTillNow] = useState<boolean[]>([true]);
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+        if (e.target.checked) {
+            let newCheck = [...tillNow];
+            newCheck[index] = true;
+            setTillNow(newCheck);
+            setValue(`experience.${index}.end_date`, 'Till now' );
+        } else {
+            const newCheck = [...tillNow];
+            newCheck[index] = false;
+            setTillNow(newCheck);
+        }
     };
 
     useEffect(() => {
-        append({ company_name: '', job_title: '', description:'' })
-    },[]);
+        append({ company_name: '', job_title: '', description:'', start_date: new Date(), end_date: 'Till now' });
+    }, []);
 
     return (
         <Template header={'Experience'}>
             <FormProvider {...methods}>
                 <form className='form' onSubmit={methods.handleSubmit(submit)} >
-                    {fields.map(({ id}, index) =>
-                        <div key={id} className = 'Experience'>
+                    {fields.map(({ id },  index) =>
+                        <div key={id} className = 'arrays'>
                             <h4>
                                 Job {`${index + 1}`}
                             </h4>
-                            <ReactHookFormTextField2 label="Employer" name={`experience.${index}.company_name`} index={index} required={true}/>
-                            <ReactHookFormTextField2 label="Job title" name={`experience.${index}.job_title`} index={index} required={true} />
-                            <ReactHookFormTextField2 label="Description" name={`experience.${index}.description`} index={index} rows={4} required={true} />
+                            <ReactHookFormTextField2 label="Employer" name={`experience.${index}.company_name`} index={index} />
+                            <ReactHookFormTextField2 label="Job title" name={`experience.${index}.job_title`} index={index}  />
+                            <ReactHookFormTextField2 label="Description" name={`experience.${index}.description`} index={index} rows={4}/>
+                            <div className='date-row'>
+                                <div className='first-child'>
+                                    <RHookFormDataPicker name={`experience.${index}.start_date`} label={'Start date'} views={['year', 'month']} />
+                                </div>
+                                <div className='second-child'>
+                                    <RHookFormDataPicker name={`experience.${index}.end_date`} label={'End date'}  views={['year', 'month']} disable={tillNow[index]} />
+                                </div>
+                            </div>
+                            <FormControlLabel
+                                label='Still working'
+                                control={<Checkbox
+                                    checked={ tillNow[index] ? tillNow[index] : false }
+                                    onChange={ (e) => onChange(e, index)}
+                                />}
+                            />
                             <Button onClick={() => remove(index)} > remove </Button>
                         </div>
                     )}

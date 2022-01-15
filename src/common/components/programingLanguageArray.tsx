@@ -1,4 +1,4 @@
-import { ReactComponent as JavaScriptIcon } from '../../assets/programing-language-icons/javascript-icon.svg'
+import { ReactComponent as JavaScriptIcon } from '../../assets/programing-language-icons/javascript-icon.svg';
 import { ReactComponent as Html } from '../../assets/programing-language-icons/html-icon.svg';
 import { ReactComponent as Php } from '../../assets/programing-language-icons/php-icon.svg';
 import { ReactComponent as Ruby } from '../../assets/programing-language-icons/ruby-icon.svg';
@@ -21,7 +21,7 @@ import { ReactComponent as Support } from '../../assets/programing-language-icon
 import { ReactComponent as Testing } from '../../assets/programing-language-icons/testing-icon.svg';
 import { ReactComponent as UXUI } from '../../assets/programing-language-icons/ux-icon.svg';
 import { ReactComponent as Game } from '../../assets/programing-language-icons/game-icon.svg';
-import { ReactComponent as Security } from '../../assets/programing-language-icons/security-icon.svg'
+import { ReactComponent as Security } from '../../assets/programing-language-icons/security-icon.svg';
 
 export const programingLanguageIconArray = [
     { name: 'JS', value:'javascript', icon: <JavaScriptIcon/> },
@@ -31,7 +31,7 @@ export const programingLanguageIconArray = [
     { name: 'Python', value: 'python', icon: <Python/> },
     { name: 'Java', value: 'java', icon: <Java/> },
     { name: 'Net', value: 'net', icon: <Net/> },
-    { name: 'Scala',value: 'scala', icon: <Scala/> },
+    { name: 'Scala', value: 'scala', icon: <Scala/> },
     { name: 'C', value: 'c', icon: <C/> },
     { name: 'Mobile', value:'mobile', icon: <Mobile/> },
     { name: 'Testing', value:'testing', icon: <Testing/> },

@@ -4,17 +4,14 @@ import MediaQuery from 'react-responsive';
 import { useSettings } from '../../../../../Settings';
 import { createStyles, makeStyles } from '@mui/styles';
 import { ButtonType } from './SortByPopOut';
-
 const useStyles = makeStyles(() =>
     createStyles({
-        label: {
-            whiteSpace: 'nowrap',
-            textTransform: 'none',
-            margin: 6,
-        },
         root: {
             '@media (min-width: 1025px)': {
                 minWidth: 100,
+                color: 'rgb(119, 119, 119)',
+                whiteSpace: 'nowrap',
+                margin: 6,
             },
             '@media (max-width: 1025px)': {
                 display: 'flex',
@@ -46,7 +43,7 @@ export const PopOutButtons = (props : ButtonType): JSX.Element=> {
 
 
     const handleClose = () => {
-        setFilters({...filters, sortBy: props.name})
+        setFilters({ ...filters, sortBy: props.name });
     };
 
     return (

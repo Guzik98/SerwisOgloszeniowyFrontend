@@ -21,7 +21,6 @@ export const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element =>
     const classes = useStyles();
     const { setFilters, filters, setViewport, viewport } = useSettings();
     const [open, setOpen] = React.useState(false);
-    console.log('here')
 
     const toggle = () => {
         setOpen(!open);
@@ -35,7 +34,7 @@ export const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element =>
             height: '98%',
             zoom: 5,
         });
-        setFilters({...filters, city: 'All'})
+        setFilters({ ...filters, city: 'All' });
 
         if (handleClose){
             handleClose();
@@ -65,18 +64,18 @@ export const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element =>
                     </MediaQuery>
                     <div className="type-work">
                         <div className="type-work-level2">
-                            <div onClick={() => setFilters({...filters, city: 'Remote Poland'}) }>
+                            <div onClick={() => setFilters({ ...filters, city: 'Remote Poland' }) }>
                                 <ButtonComponent
                                     filter= {filters.city !== 'Remote Poland'}
                                     onClick={() => handleClose}
-                                    children={'Remote Poland'}
+                                    childrens={'Remote Poland'}
                                  />
                             </div>
-                            <div onClick={() => setFilters({...filters, city: 'Remote Global'}) }>
+                            <div onClick={() => setFilters({ ...filters, city: 'Remote Global' }) }>
                                 <ButtonComponent
                                     onClick={() => handleClose}
                                     filter= {filters.city !== 'Remote Global'}
-                                    children={'Remote Global'}
+                                    childrens={'Remote Global'}
                                 />
                             </div>
                         </div>
@@ -100,11 +99,11 @@ export const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element =>
                             {cityPoland.map((item) =>
                                 <div onClick={handleClose} key={item.city}>
                                     <ButtonComponent onClick={() => {
-                                        setFilters({...filters, city: item.city})
-                                        setViewport({...viewport, zoom: 11 , latitude: item.latitude, longitude: item.longitude})
+                                        setFilters({ ...filters, city: item.city });
+                                        setViewport({ ...viewport, zoom: 11, latitude: item.latitude, longitude: item.longitude });
                                         }}
                                         filter={filters.city !== item.city}
-                                        children={item.city}
+                                        childrens={item.city}
                                     />
                                 </div>)
                             }
@@ -118,11 +117,11 @@ export const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element =>
                             {cityWorld.map((item) =>
                                 <div onClick={handleClose} key={item.city}>
                                     <ButtonComponent onClick={() => {
-                                        setFilters({...filters, city: item.city})
-                                        setViewport({...viewport, zoom: 11 , latitude: item.latitude, longitude: item.longitude})
+                                        setFilters({ ...filters, city: item.city });
+                                        setViewport({ ...viewport, zoom: 11, latitude: item.latitude, longitude: item.longitude });
                                     }}
                                                      filter={filters.city !== item.city}
-                                                     children={item.city}
+                                                     childrens={item.city}
                                     />
                                 </div>)
                             }
@@ -138,11 +137,11 @@ export const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element =>
                                 {OtherPolandCities.map((item) =>
                                     <div onClick={handleClose} key={item.city}>
                                         <ButtonComponent onClick={() => {
-                                            setFilters({...filters, city: item.city})
-                                            setViewport({...viewport, zoom: 11 , latitude: item.latitude, longitude: item.longitude})
+                                            setFilters({ ...filters, city: item.city });
+                                            setViewport({ ...viewport, zoom: 11, latitude: item.latitude, longitude: item.longitude });
                                         }}
                                                          filter={filters.city !== item.city}
-                                                         children={item.city}
+                                                         childrens={item.city}
                                         />
                                     </div>)
                                 }
@@ -152,7 +151,7 @@ export const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element =>
                     <Divider className="divider-pop" variant="fullWidth"/>
                     <ButtonComponent
                         onClick={clear}
-                        children={'Clear Filter'}
+                        childrens={'Clear Filter'}
                         filter={true}
                     />
 

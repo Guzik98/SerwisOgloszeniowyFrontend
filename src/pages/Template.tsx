@@ -6,9 +6,9 @@ type TemplateType = {
     header: string,
     p?: string,
     children: JSX.Element,
-}
+};
 
-const Template = ({ header, p , children}: TemplateType) => {
+const Template = ({ header, p, children }: TemplateType) => {
     const size: ScreenSize = useWindowSize();
     const style = {
         maxHeight: size.height - 200,

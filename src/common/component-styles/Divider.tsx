@@ -8,4 +8,4 @@ export const StyledDivider = styled(Divider)`
     height: 42px;
     margin: 0 6px;
    }
-`
+`;

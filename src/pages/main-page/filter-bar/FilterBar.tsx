@@ -3,7 +3,7 @@ import { programingLanguageIconArray } from '../../../common/components/programi
 import { useSettings } from '../../../Settings';
 import Location from './Buttons/Location/Location';
 import MoreFilters from './Buttons/more-filters/MoreFilters';
-import './filter-bar.sass'
+import './filter-bar.sass';
 import AllIcon from './Buttons/All-icon';
 import MediaQuery from 'react-responsive';
 import Tech from './Buttons/tech/Tech';
@@ -11,7 +11,6 @@ import SortBy from './Buttons/sort-by/SortBy';
 
 const FilterBar = (): JSX.Element => {
     const { setFilters, filters } = useSettings();
-    console.log(filters);
     return (
         <div className="filter-bar">
             <div className="filter-bar-elements">
@@ -21,15 +20,15 @@ const FilterBar = (): JSX.Element => {
                 </MediaQuery>
                 <div className="icon-bar">
                     <MediaQuery minWidth={1025}>
-                        <div onClick={() => setFilters( {...filters, mainTech: 'All'})}
-                             className = {`${ filters.mainTech !== 'All'?  'un-active' : '' }`}
+                        <div onClick={() => setFilters( { ...filters, mainTech: 'All' })}
+                             className = {`${ filters.mainTech !== 'All' ?  'un-active' : '' }`}
                         >
                             <AllIcon/>
                         </div>
                         {programingLanguageIconArray.map((item) => {
                             return (
-                                <div onClick={() => setFilters( {...filters, mainTech: item.value})}
-                                     className = {`${filters.mainTech !== item.value && filters.mainTech !== 'All'?  'un-active' : '' }`}
+                                <div onClick={() => setFilters( { ...filters, mainTech: item.value })}
+                                     className = {`${filters.mainTech !== item.value && filters.mainTech !== 'All' ?  'un-active' : '' }`}
                                      key={item.value}
                                 >
                                     <div className = 'icon'>
@@ -41,7 +40,7 @@ const FilterBar = (): JSX.Element => {
                                 </span>
                                     </div>
                                 </div>
-                            )
+                            );
                         })}
                     </MediaQuery>
                 </div>

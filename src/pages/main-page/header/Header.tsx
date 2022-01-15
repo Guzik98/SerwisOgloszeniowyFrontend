@@ -10,7 +10,8 @@ import { StyledDivider } from '../../../common/component-styles/Divider';
 
 const Header = () => {
 
-    const { username } = useAuth();
+    const { username, loggedIn, logout } = useAuth();
+
     const navigate = useNavigate();
     return (
         <div className="header">
@@ -24,12 +25,18 @@ const Header = () => {
                     #1 Job Board for IT industry in Poland
                 </div>
                 <div className='left-end'>
+                    { loggedIn &&
+                        <>
+                            <StyledDivider  orientation="vertical" flexItem/>
+                            <SubmitButtonStyled onClick={() => logout() }>Log out</SubmitButtonStyled>
+                        </>
+                    }
                     <StyledDivider  orientation="vertical" flexItem/>
                     { username ? <SubmitButtonStyled >{username}</SubmitButtonStyled> :
-                        <SubmitButtonStyled onClick={() => navigate('/login')}>Sign IN</SubmitButtonStyled>}
+                        <SubmitButtonStyled onClick={() => navigate('/login')}>Sign in</SubmitButtonStyled>}
                     <StyledDivider orientation="vertical" flexItem/>
                     <SubmitButtonStyled onClick={() =>  navigate('/postoffer')}>
-                        Post a offer
+                        Post offer
                     </SubmitButtonStyled>
                     <StyledDivider  orientation="vertical" flexItem/>
                     <IconButton

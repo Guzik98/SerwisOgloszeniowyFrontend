@@ -30,7 +30,7 @@ const Projects = () => {
         resolver: yupResolver(formSchema)
     });
 
-    const { control } = methods
+    const { control } = methods;
 
     const { fields, append, remove } = useFieldArray({
         control,
@@ -44,26 +44,26 @@ const Projects = () => {
         actions.updateOffer({
             ...state.yourDetails,
             projects: data.projects
-        })
+        });
         console.log(state.yourDetails);
-        navigate('/postoffer/programing')
+        navigate('/postoffer/programing');
     };
 
     useEffect(() => {
         append({ project_name: '', description:'' });
-    },[])
+    }, []);
 
     return (
         <Template header={'Projects'}>
             <FormProvider {...methods}>
                 <form className='form' onSubmit={methods.handleSubmit(submit)} >
-                    {fields.map(({ id}, index) =>
-                        <div key={id} className = 'Experience'>
+                    {fields.map(({ id },  index) =>
+                        <div key={id} className = 'arrays'>
                             <h4>
                                 Projects {`${index + 1}`}
                             </h4>
-                            <ReactHookFormTextField2 label="Project name" name={`projects.${index}.project_name`} index={index} required={true}/>
-                            <ReactHookFormTextField2 label="Project description" name={`projects.${index}.description`} index={index}  rows={4} required={true} />
+                            <ReactHookFormTextField2 label="Project name" name={`projects.${index}.project_name`} index={index} />
+                            <ReactHookFormTextField2 label="Project description" name={`projects.${index}.description`} index={index}  rows={4}  />
                             <Button onClick={() => remove(index)} > remove </Button>
                         </div>
                     )}

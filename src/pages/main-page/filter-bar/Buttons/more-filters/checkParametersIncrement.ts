@@ -1,4 +1,3 @@
-import { useSettings } from '../../../../../Settings';
 
 export const checkParametersIncrement = ( filters: { city?: string; mainTech?: string; seniority: any; employmentType: any; fromSalary: any; toSalary: any; sortBy?: string; withSalary?: boolean; } ) : number => {
     let counter = 0;

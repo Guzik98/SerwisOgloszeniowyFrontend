@@ -1,5 +1,5 @@
 import React from 'react';
-import { number, object, string } from 'yup';
+import { object, string } from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useStateMachine } from 'little-state-machine';
 import { updateOffer } from '../state-machine/yourDetailsAction';
@@ -12,10 +12,10 @@ import Template from '../../Template';
 
 const formSchema = object({
     email: string().email().required('Email is required'),
-    phone_number: string().length(9,'Invalid number'),
+    phone_number: string().length(9, 'Invalid number'),
     github_url: string().url().nullable(),
     linkedin_url: string().url().nullable(),
-})
+});
 
 const Contact = () => {
     const navigate = useNavigate();
@@ -40,8 +40,8 @@ const Contact = () => {
         <Template header={'Contact'}>
             <FormProvider {...methods}>
                 <form className='form' onSubmit={methods.handleSubmit(submit)}>
-                    <ReactHookFormTextField label="Email" name="email" required={true} />
-                    <ReactHookFormTextField label="Phone number" name="phone_number" type="number" required={true} />
+                    <ReactHookFormTextField label="Email" name="email"/>
+                    <ReactHookFormTextField label="Phone number" name="phone_number" type="number"/>
                     <ReactHookFormTextField label="Github" name="github_url" />
                     <ReactHookFormTextField label="Linkedin" name="linkedin_url" />
                     <SubmitButtonStyled type="submit" variant="contained" color="primary">

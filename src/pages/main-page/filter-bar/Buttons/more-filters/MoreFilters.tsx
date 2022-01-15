@@ -9,7 +9,7 @@ import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import { Dialog } from '@mui/material';
 import { checkParametersIncrement } from './checkParametersIncrement';
 import MoreFilersPopOut from './MoreFilersPopOut';
-import './moreFilters.sass'
+import './moreFilters.sass';
 
 
 const MoreFilters = () => {
@@ -30,7 +30,7 @@ const MoreFilters = () => {
         <>
             <ButtonComponent
                 onClick={handleClickOpen}
-                width='132px'
+                width='150px'
                 filter={(!(filters.fromSalary != 0 || filters.toSalary != 100000 ||
                     filters.employmentType != 'All' || filters.seniority != 'All'))}
                 endIcon={ size.width > 1025 ? open ? <ExpandLess/> : <ExpandMore/> : <></> }
@@ -38,7 +38,7 @@ const MoreFilters = () => {
                     : <MediaQuery minWidth={1025}>
                         <DensitySmallIcon/>
                     </MediaQuery>}
-                children='More filters'
+                childrens='More filters'
             />
             <MediaQuery maxWidth={1025}>
                 <Dialog fullScreen onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>

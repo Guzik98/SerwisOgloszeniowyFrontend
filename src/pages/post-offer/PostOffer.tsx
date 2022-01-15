@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {  Route, Routes, useNavigate } from 'react-router-dom';
-import { StateMachineProvider, useStateMachine } from 'little-state-machine';
+import { StateMachineProvider } from 'little-state-machine';
 import Address from './pages/Address';
 import PersonalInfo from './pages/PersonalInfo';
 import Contact from './pages/Contact';
@@ -13,11 +13,11 @@ import Employment from './pages/Employment';
 import Programing from './pages/Programing';
 
 const PostOffer = (): JSX.Element => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     useEffect(()=> {
         navigate('personalinfo');
-    },[])
+    }, []);
 
     return (
         <StateMachineProvider>

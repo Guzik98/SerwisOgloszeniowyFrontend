@@ -1,0 +1,117 @@
+.offers
+  display: flex
+  flex-direction: column
+  flex: 0 0 100%
+  width: 100%
+  background: rgb(243, 246, 248)
+  .offers-menu
+      display: flex
+      -webkit-box-pack: justify
+      justify-content: space-between
+      align-items: flex-end
+      overflow: hidden
+      background-color: rgb(255, 255, 255)
+      height: 36px
+      margin-bottom: 8px
+      @media (min-width: 1025px)
+        display: flex
+        height: 40px
+        margin-bottom: 8px
+      .offers-menu-left-side
+        display: flex
+        justify-content: flex-end
+      .left-side-buttons
+        display: flex
+        flex: 1 1 0
+        height: 36px
+        padding: 0 12px
+        align-items: center
+        @media (min-width: 1025px)
+          height: 40px
+          padding-left: 30px
+        .tab-active
+          display: flex
+          height: inherit
+          cursor: pointer
+          background-color: rgb(243, 246, 248) !important
+          border-top-left-radius: 32px
+          border-top-right-radius: 32px
+          border-bottom-right-radius: -120%
+          border: 1px solid rgb(243, 246, 248)
+      .offers
+        display: flex
+        justify-content: center
+        align-items: center
+        text-decoration: none
+        width: 100%
+        max-width: 20%
+        min-width: 120px
+        height: inherit
+        color: rgb(119, 119, 119)
+        font-weight: 600
+        background-color: white
+        border: unset
+        white-space: nowrap
+        @media(max-width: 1024.95px)
+          font-size: 12px
+        &:hover
+          cursor: pointer
+          background-color: rgb(243, 246, 248)
+          border-top-left-radius: 32px
+          border-top-right-radius: 32px
+          border-bottom-right-radius: -120%
+          border: 1px solid rgb(243, 246, 248)
+  .offers-content-3
+    display: flex
+    flex: 1 1 0%
+    flex-direction: column
+    position: relative
+    overflow-y: auto
+    will-change: transform
+    padding-bottom: 12px
+    padding-left: 10px
+    padding-right: 10px
+    &::-webkit-scrollbar
+      width: 12px
+    &::-webkit-scrollbar-thumb
+      background-color: rgb(173, 175, 180)
+      border-radius: 20px
+      height: 20px
+    .default
+      display: flex
+      font-size: 14px
+      flex-direction: column
+      width: 100%
+      padding: 20px
+      height: 500px
+      text-align: center
+      align-items: center
+      color: rgb(55, 71, 79)
+      .default-content
+        padding-top: 50px
+      .clear-btn
+        margin-top: 20px
+        max-width: fit-content
+        color: #757575
+        background: #ffffff
+        border-color: #e2e6ec
+        border-radius: 24px
+        height: 36px
+        padding: 0 16px
+    .offers-option
+      display: flex
+      justify-content: space-evenly
+      margin: -5px 10px 10px
+      .options
+        text-transform: none
+        width: 30%
+      .edit-offer
+        border-radius: 32px
+        margin-right: 10px
+        color: rgb(164, 164, 238)
+        border: 1px solid rgb(164, 164, 238)
+      .delete-offer
+        margin-left: 10px
+        border-radius: 32px
+        color: rgb(255, 64, 129)
+        border: 1px solid rgb(255, 64, 129)

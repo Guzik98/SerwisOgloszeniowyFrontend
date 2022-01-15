@@ -21,28 +21,28 @@ import { red } from '@mui/material/colors';
 const skillsSchema = object({
     name: string().required('This field is required'),
     level: string().required('This field is required'),
-})
+});
 
 const formSchema = object({
     marker_icon: string().required(),
     experience_level: string().required(),
     language: array().of(skillsSchema)
-})
+});
 
 const Programing = () => {
     const navigate = useNavigate();
-    const { actions, state } = useStateMachine({ updateOffer});
+    const { actions, state } = useStateMachine({ updateOffer });
 
     const methods = useForm<IFormOfferPrograming>({
         resolver: yupResolver(formSchema)
     });
 
-    const { control, getValues } = methods
+    const { control } = methods;
 
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'language'
-    })
+    });
 
     const submit: SubmitHandler<IFormOfferPrograming> = (data: IFormOfferPrograming) => {
         actions.updateOffer({
@@ -50,13 +50,13 @@ const Programing = () => {
             marker_icon: data.marker_icon,
             experience_level: data.experience_level,
             language: data.language
-        })
-        navigate('/postoffer/skills')
-    }
+        });
+        navigate('/postoffer/skills');
+    };
 
     useEffect( () => {
-        append({ name: 'English', level: 'A2' })
-    },[])
+        append({ name: 'English', level: '' });
+    }, []);
 
     return (
         <Template header={'Programing'}>
@@ -100,14 +100,14 @@ const Programing = () => {
                             Languages
                         </h2>
                     </div>
-                    {fields.map(({ id}, index) =>
-                        <div key={id} className = 'education'>
+                    {fields.map(({ id }, index) =>
+                        <div key={id} className = 'arrays'>
                             <div className='name-level'>
                                 <div className='name-small'>
-                                    <ReactHookFormTextField2 label="Language" name={`language.${index}.name`} index={index} required={true}/>
+                                    <ReactHookFormTextField2 label="Language" name={`language.${index}.name`} index={index} />
                                 </div>
                                 <div className='level-big'>
-                                    <ReactHookFormTextField2 label="Level" name={`language.${index}.level`} index={index} defaultValue={getValues(`language.${index}.level`)} select={true} >
+                                    <ReactHookFormTextField2 label="Level" name={`language.${index}.level`} index={index} select={true} >
                                         {englishSkillInput.map((item) =>
                                             <MenuItem key={item.label} value={item.value}>{item.label}</MenuItem>
                                         )}

@@ -1,21 +1,22 @@
 import axios from 'axios';
-import Skills from '../pages/post-offer/pages/Skills';
 import { GlobalState } from '../pages/post-offer/state-machine/type';
+import { UpperCase } from '../functions/upperCase';
 
 export const sendOffer = (data: GlobalState) => {
-    console.log(data.yourDetails)
-    const url = 'http://localhost:3000/offer'
+    console.log(data);
+    const url = 'http://localhost:3000/offer';
     const today = new Date().toISOString();
-    axios.post(url,{
+
+    axios.post(url,  {
         name: data.yourDetails.name,
         surname: data.yourDetails.surname,
          short_personal_description: data.yourDetails.shortDescription,
-         photoUrl: data.yourDetails.photoUrl,
-         title: data.yourDetails.name + ' ' + data.yourDetails.surname,
-         street: data.yourDetails.street,
-         city: data.yourDetails.city,
+         photo_url: data.yourDetails.photoUrl,
+         title: UpperCase(data.yourDetails.name) + ' ' + UpperCase(data.yourDetails.surname),
+         street: UpperCase(data.yourDetails.street),
+         city: UpperCase(data.yourDetails.city),
          country_code: data.yourDetails.country_code,
-         address_text: data.yourDetails.street + ', ' + data.yourDetails.city + ', ' + data.yourDetails.country_code,
+         address_text: UpperCase(data.yourDetails.street) + ', ' + UpperCase(data.yourDetails.city) + ', ' + data.yourDetails.country_code,
          email: data.yourDetails.email,
          github: data.yourDetails.github_url,
          linkedin_url: data.yourDetails.linkedin_url,
@@ -41,5 +42,5 @@ export const sendOffer = (data: GlobalState) => {
     })
         .catch((error) => {
             console.log(error);
-        })
-}
+        });
+};

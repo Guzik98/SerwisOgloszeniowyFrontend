@@ -8,10 +8,13 @@ import { SkillsType } from './offer/skill';
 import { EmploymentType } from './offer/employment';
 
 export type OfferType = {
+    _id: string,
+    title: string;
     name: string,
     surname: string,
     shortDescription: string,
-    photoUrl: string | null
+    published_at: string
+    photo_url: string,
     street: string,
     city: string,
     country_code: string,
@@ -30,4 +33,5 @@ export type OfferType = {
     experience_level: ExperienceLevelEnum
     skills: SkillsType[]
     employment_type: EmploymentType[]
+    owner: string
 }

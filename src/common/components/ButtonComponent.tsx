@@ -48,14 +48,11 @@ export const useStyles = makeStyles(() =>
     }),
 );
 
-
-
-
-const ButtonComponent = ({ onClick, children, filter, endIcon, startIcon, role, width,  justifyContent }: ButtonComponentType ): JSX.Element => {
+const ButtonComponent = ({ onClick, childrens, filter, endIcon, startIcon, role, width, justifyContent, height }: ButtonComponentType ): JSX.Element => {
     const classes = useStyles();
     return (
          <Button
-             sx={{ minWidth: width, justifyContent: justifyContent }}
+             sx={{ minWidth: width, justifyContent: justifyContent, maxHeight: height }}
              size='small'
              variant='outlined'
              onClick={onClick}
@@ -64,7 +61,7 @@ const ButtonComponent = ({ onClick, children, filter, endIcon, startIcon, role, 
              endIcon={endIcon}
              startIcon={startIcon}
          >
-             {children}
+             {childrens}
          </Button>
     );
 };

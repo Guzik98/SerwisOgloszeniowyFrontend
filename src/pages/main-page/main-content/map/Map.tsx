@@ -5,10 +5,11 @@ import { useWindowSize } from '../../../../functions/handle-resize';
 import { OfferType } from '../../../../types/offer';
 import ReactMapGL, { Marker, NavigationControl, Popup } from 'react-map-gl';
 import './map.sass';
+import { FilteredType } from '../../../../types/filtered';
 
-export const Map = (): JSX.Element =>  {
+export const Map = ({ filtered }: FilteredType): JSX.Element =>  {
     const size: ScreenSize = useWindowSize();
-    const { offers, viewport, setViewport } = useSettings();
+    const { viewport, setViewport } = useSettings();
     const [ selectedOffer, setSelectedOffer ] = useState<OfferType | null>(null);
 
     const style = {
@@ -40,7 +41,7 @@ export const Map = (): JSX.Element =>  {
                 }}
             >
                 <NavigationControl style={navControlStyle} />
-                { offers?.map((item) => {
+                { filtered?.map((item) => {
                     return (
                         <Marker key={item._id} latitude={+item.latitude} longitude={+item.longitude}  >
                             <button className="market-btn"

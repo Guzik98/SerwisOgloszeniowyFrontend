@@ -32,7 +32,6 @@ const PostOffer = (): JSX.Element => {
                 <Route path="programing" element={<Programing/>} />
                 <Route path="skills" element={<Skills/>} />
                 <Route path="employment" element={<Employment/>} />
-                {/*<Route path="/result" element={<Adress/>} />*/}
             </Routes>
         </StateMachineProvider>
     );

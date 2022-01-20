@@ -10,7 +10,7 @@ const ReactHookFormTextField3: FC<IReactHookFormTextFieldProps2> = ({ label, nam
         formState: { errors },
     } = useFormContext();
 
-    let nameSplit = name.split('.');
+    const nameSplit = name.split('.');
 
     return (
         <TextField

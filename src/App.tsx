@@ -23,6 +23,7 @@ function App() {
         <div className="App">
             <Routes>
                 <Route path="/*" element={<MainPage/>} />
+                <Route path="/mainpage/*" element={<MainPage/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/register" element={<Register/>} />
                 <Route element={<RequireAuth/>} >

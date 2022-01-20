@@ -1,6 +1,7 @@
 import { useSettings } from '../Settings';
 import { OfferType } from '../types/offer';
 import { ExperienceLevelEnum } from '../enums/experience_level';
+import { ContractTypeEnum } from '../enums/contract-enum';
 
 
 export const  filterFunction = (): OfferType[] | undefined => {
@@ -22,7 +23,7 @@ export const  filterFunction = (): OfferType[] | undefined => {
         });
     }
 
-    if ( filters.employmentType !== 'All'){
+    if ( filters.employmentType !== ContractTypeEnum.ALL){
         filtered = filtered?.map((element) => {
             return { ...element, employment_type: element.employment_type.filter((subElement) => subElement.type === filters.employmentType ) };
         });
@@ -68,12 +69,12 @@ export const  filterFunction = (): OfferType[] | undefined => {
                 })
             };
         });
+
         filtered = filtered?.sort((a, b): number => {
-            let aHelpTo, aHelpFrom, bHelpTo, bHelpFrom;
-            aHelpTo = a.employment_type[0].salary?.to;
-            aHelpFrom = a.employment_type[0].salary?.from;
-            bHelpTo = b.employment_type[0].salary?.to;
-            bHelpFrom = b.employment_type[0].salary?.from;
+            const aHelpTo = a.employment_type[0].salary?.to;
+            const aHelpFrom = a.employment_type[0].salary?.from;
+            const bHelpTo = b.employment_type[0].salary?.to;
+            const bHelpFrom = b.employment_type[0].salary?.from;
             if ( aHelpTo && aHelpFrom && bHelpFrom && bHelpTo){
                 if (filters.sortBy === 'Highest Salary') {
                     if (aHelpTo === bHelpTo){

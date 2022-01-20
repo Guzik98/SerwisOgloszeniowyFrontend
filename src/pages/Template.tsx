@@ -1,12 +1,7 @@
 import React from 'react';
 import { useWindowSize } from '../functions/handle-resize';
 import { ScreenSize } from '../types/ScreenSize';
-
-type TemplateType = {
-    header: string,
-    p?: string,
-    children: JSX.Element,
-};
+import { TemplateType } from '../types/forms/TemplateType';
 
 const Template = ({ header, p, children }: TemplateType) => {
     const size: ScreenSize = useWindowSize();

@@ -12,7 +12,7 @@ export type OfferType = {
     title: string;
     name: string,
     surname: string,
-    shortDescription: string,
+    short_personal_description: string,
     published_at: string
     photo_url: string,
     street: string,

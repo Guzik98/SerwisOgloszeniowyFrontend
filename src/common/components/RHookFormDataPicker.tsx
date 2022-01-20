@@ -1,19 +1,11 @@
 import React from 'react';
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import { TextField } from '@mui/material';
-import { useFormContext } from 'react-hook-form';
-import { Controller } from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { DatePickerView } from '@mui/lab/DatePicker/shared';
+import { ReactHookFormDataPickerType } from '../../types/forms/buttons/ReactHookFormDataPicker';
 
-type Dfdsfsd = {
-    name: string
-    label: string
-    disable?: boolean
-    views: DatePickerView[] | undefined
-};
-
-const RHookFormDataPicker = ({ name, label, disable, views }: Dfdsfsd) => {
+const RHookFormDataPicker = ({ name, label, disable, views }: ReactHookFormDataPickerType) => {
 
     const {
         control,

@@ -7,11 +7,13 @@ import SortBy from '../../filter-bar/Buttons/sort-by/SortBy';
 import OfferTab from './offer-tab/OfferTab';
 import './offers.sass';
 import { v4 as uuidv4 } from 'uuid';
-import { filterFunction } from '../../../../functions/filtering';
 import { useAuth } from '../../../../AuthContext';
+import { OfferComponentType } from '../../../../types/offer-component';
+import { useNavigate } from 'react-router-dom';
 
-const Offers = () => {
+const Offers = ({ filtered, setOfferDetailData }: OfferComponentType) => {
     const size: ScreenSize = useWindowSize();
+    const navigate = useNavigate();
     const { filters, setFilters, offers } = useSettings();
     const { loggedIn, email } = useAuth();
 
@@ -22,13 +24,14 @@ const Offers = () => {
         minWidth: size.width < 1025 ? size.width - 20 : (size.width < 1500 ? size.width / 1.68 : size.width / 2),
     };
 
+    console.log(setOfferDetailData);
+
     const [tabUserOffersActive, setTabUserOffersActive] = useState({
         withOutSalary: true,
         withSalary: false,
         userOffers: false,
     });
 
-    const filtered = filterFunction();
     return (
         <div className="offers">
             <div className='offers-menu'>
@@ -105,7 +108,11 @@ const Offers = () => {
                     filtered?.map((props) => {
                          return props.employment_type.map((propsEmployment, index) => {
                              if (index === 0) {
-                                return <OfferTab props={props} propsEmployment={propsEmployment} key={props._id + uuidv4()}/>;
+                                 return (
+                                     <div onClick={ () => { setOfferDetailData(props); navigate('/mainpage/details'); } }>
+                                         <OfferTab props={props} propsEmployment={propsEmployment} key={props._id + uuidv4()} />
+                                     </div>
+                                 );
                              }
                         });
                     })

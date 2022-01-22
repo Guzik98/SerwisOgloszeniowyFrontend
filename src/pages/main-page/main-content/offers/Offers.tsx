@@ -9,6 +9,8 @@ import './offers.sass';
 import { v4 as uuidv4 } from 'uuid';
 import { useAuth } from '../../../../AuthContext';
 import { OfferComponentType } from '../../../../types/offer-component';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
 
 const Offers = ({ filtered, setOfferDetailData }: OfferComponentType) => {
@@ -23,8 +25,6 @@ const Offers = ({ filtered, setOfferDetailData }: OfferComponentType) => {
         maxWidth: size.width < 1025 ? size.width - 20 : (size.width < 1500 ? size.width / 1.68 : size.width / 2),
         minWidth: size.width < 1025 ? size.width - 20 : (size.width < 1500 ? size.width / 1.68 : size.width / 2),
     };
-
-    console.log(setOfferDetailData);
 
     const [tabUserOffersActive, setTabUserOffersActive] = useState({
         withOutSalary: true,
@@ -99,7 +99,15 @@ const Offers = ({ filtered, setOfferDetailData }: OfferComponentType) => {
                              if (item.owner === email ){
                                  return item.employment_type.map((propsEmployment, index) => {
                                      if (index === 0) {
-                                         return <OfferTab props={item} propsEmployment={propsEmployment} key={item._id + uuidv4()}/>;
+                                         return (
+                                             <div className={'column'}>
+                                                 <OfferTab  onClick={ () => { setOfferDetailData(item); navigate('/mainpage/details'); } }  props={item} propsEmployment={propsEmployment} key={item._id + uuidv4()}/>
+                                                 <div className={'edit-remove'}>
+                                                     <AddIcon  />
+                                                     <RemoveIcon onClick={ () => navigate('/edit',  { state: { ...item } } ) }/>
+                                                 </div>
+                                             </div>
+                                         );
                                      }
                                  });
                              }

@@ -3,5 +3,5 @@ export type EducationType = {
     degree: string,
     area: string,
     start_date: Date,
-    end_date: Date | string | number,
+    end_date: Date | string,
 }

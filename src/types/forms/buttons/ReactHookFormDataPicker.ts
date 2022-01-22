@@ -5,4 +5,5 @@ export type ReactHookFormDataPickerType = {
     label: string
     disable?: boolean
     views: DatePickerView[] | undefined
+    index: number
 }

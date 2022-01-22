@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { array, object, string } from 'yup';
+import { array, date, object, string } from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useStateMachine } from 'little-state-machine';
 import { updateOffer } from '../state-machine/yourDetailsAction';
@@ -11,23 +11,28 @@ import { Button, Checkbox, FormControlLabel } from '@mui/material';
 import { SubmitButtonStyled } from '../../../common/component-styles/SubmitButton';
 import Template from '../../Template';
 import RHookFormDataPicker from '../../../common/components/RHookFormDataPicker';
+import { TemplateTypeChild } from '../../../types/forms/TemplateTypeChild';
 
 const expSchema = object({
     company_name: string().required('this field is required'),
     job_title: string().required('this field is required'),
     description: string().required('this field is required'),
+    start_date: date().required('this field is required'),
 });
 
 const formSchema = object({
     experience: array().of(expSchema)
 });
 
-const Experience = () => {
+const Experience = ({ type }: TemplateTypeChild) => {
     const navigate = useNavigate();
 
     const { actions, state } = useStateMachine({ updateOffer });
 
     const methods = useForm<IFormOfferExperience>({
+        defaultValues: {
+            experience: state.yourDetails.experience,
+        },
         resolver: yupResolver(formSchema)
     });
 
@@ -46,26 +51,29 @@ const Experience = () => {
             ...state.yourDetails,
             experience: data.experience
         });
-        navigate('/postoffer/projects');
+        navigate(`/${type}/projects`);
     };
 
     const [tillNow, setTillNow] = useState<boolean[]>([true]);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         if (e.target.checked) {
-            let newCheck = [...tillNow];
+            const newCheck = [...tillNow];
             newCheck[index] = true;
             setTillNow(newCheck);
             setValue(`experience.${index}.end_date`, 'Till now' );
         } else {
             const newCheck = [...tillNow];
             newCheck[index] = false;
+            setValue(`experience.${index}.end_date`, new Date() );
             setTillNow(newCheck);
         }
     };
 
     useEffect(() => {
-        append({ company_name: '', job_title: '', description:'', start_date: new Date(), end_date: 'Till now' });
+        if (state.yourDetails.experience === null){
+            append({ company_name: '', job_title: '', description:'', start_date: new Date(), end_date: 'Till now' });
+        }
     }, []);
 
     return (
@@ -82,10 +90,10 @@ const Experience = () => {
                             <ReactHookFormTextField2 label="Description" name={`experience.${index}.description`} index={index} rows={4}/>
                             <div className='date-row'>
                                 <div className='first-child'>
-                                    <RHookFormDataPicker name={`experience.${index}.start_date`} label={'Start date'} views={['year', 'month']} />
+                                    <RHookFormDataPicker name={`experience.${index}.start_date`} label={'Start date'} views={['year', 'month']} index={index} />
                                 </div>
                                 <div className='second-child'>
-                                    <RHookFormDataPicker name={`experience.${index}.end_date`} label={'End date'}  views={['year', 'month']} disable={tillNow[index]} />
+                                    <RHookFormDataPicker name={`experience.${index}.end_date`} label={'End date'}  views={['year', 'month']} index={index} disable={tillNow[index]} />
                                 </div>
                             </div>
                             <FormControlLabel
@@ -99,9 +107,14 @@ const Experience = () => {
                         </div>
                     )}
                     <Button  type="button" onClick={() => append({ company_name: '', job_title: '', description:'' }) }> Add one more job</Button>
-                    <SubmitButtonStyled type="submit" variant="contained" color="primary">
-                        Next
-                    </SubmitButtonStyled>
+                    <div className='row'>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginRight: '10px' }} onClick={() => navigate(`/${type}/courses`)}>
+                            Previous
+                        </SubmitButtonStyled>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginLeft: '10px' }}>
+                            Next
+                        </SubmitButtonStyled>
+                    </div>
                 </form>
             </FormProvider>
         </Template>

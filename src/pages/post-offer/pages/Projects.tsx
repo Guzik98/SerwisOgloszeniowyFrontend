@@ -10,6 +10,7 @@ import ReactHookFormTextField2 from '../../../common/components/RHookFormTextFie
 import { Button } from '@mui/material';
 import { SubmitButtonStyled } from '../../../common/component-styles/SubmitButton';
 import Template from '../../Template';
+import { TemplateTypeChild } from '../../../types/forms/TemplateTypeChild';
 
 const projectSchema = object({
     project_name: string().required('this field is required'),
@@ -20,13 +21,15 @@ const formSchema = object({
     projects: array().of(projectSchema)
 });
 
-
-const Projects = () => {
+const Projects = ({ type }: TemplateTypeChild) => {
     const navigate = useNavigate();
 
     const { actions, state } = useStateMachine({ updateOffer });
 
     const methods = useForm<IFormOfferProject>({
+        defaultValues:{
+            projects: state.yourDetails.projects,
+        },
         resolver: yupResolver(formSchema)
     });
 
@@ -46,11 +49,13 @@ const Projects = () => {
             projects: data.projects
         });
         console.log(state.yourDetails);
-        navigate('/postoffer/programing');
+        navigate(`/${type}/programing`);
     };
 
     useEffect(() => {
-        append({ project_name: '', description:'' });
+        if (state.yourDetails.projects === null){
+            append({ project_name: '', description:'' });
+        }
     }, []);
 
     return (
@@ -68,9 +73,14 @@ const Projects = () => {
                         </div>
                     )}
                     <Button  type="button" onClick={() => append({ project_name: '', description:'' }) }> Add one more project</Button>
-                    <SubmitButtonStyled type="submit" variant="contained" color="primary">
-                        Next
-                    </SubmitButtonStyled>
+                    <div className='row'>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginRight: '10px' }} onClick={() => navigate(`/${type}/experience`)}>
+                            Previous
+                        </SubmitButtonStyled>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginLeft: '10px' }}>
+                            Next
+                        </SubmitButtonStyled>
+                    </div>
                 </form>
             </FormProvider>
         </Template>

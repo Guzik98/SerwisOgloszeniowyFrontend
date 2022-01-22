@@ -50,7 +50,7 @@ const Tech = ( { skill } : TechType) => {
     return (
         <>
             <div className='blue-left-side' >
-                <p className='row-name'> Tech stack </p>
+                <p className='row-name'> TECH STACK </p>
                 <Divider/>
             </div>
             <div className='white-right-side'>

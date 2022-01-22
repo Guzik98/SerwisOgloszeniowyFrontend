@@ -12,17 +12,25 @@ import { MenuItem } from '@mui/material';
 import { countryCodeInput } from './select-inputs/country-code-input';
 import { RHookFormSelect } from '../../../common/components/RHookFormSelect';
 import Template from '../../Template';
+import { TemplateTypeChild } from '../../../types/forms/TemplateTypeChild';
 
 const formSchema = object({
     street: string().required('This field ois required'),
     city: string().required('This field ois required'),
+    country_code: string().required('This field ois required')
 });
 
-const Address = () => {
+const Address = ({ type }: TemplateTypeChild) => {
     const navigate = useNavigate();
     const { actions, state } = useStateMachine({ updateOffer });
+    console.log(type);
 
     const methods = useForm<IFormOfferAddress>({
+        defaultValues: {
+            street: state.yourDetails.street,
+            city: state.yourDetails.city,
+            country_code: state.yourDetails.country_code,
+        },
         resolver: yupResolver(formSchema),
     });
 
@@ -33,7 +41,7 @@ const Address = () => {
             city: data.city,
             country_code: data.country_code
         });
-        navigate('/postoffer/contact');
+        navigate(`/${type}/contact`);
     };
 
     return (
@@ -42,14 +50,19 @@ const Address = () => {
                 <form className='form' onSubmit={methods.handleSubmit(submit)}>
                     <ReactHookFormTextField label="Street" name="street"  />
                     <ReactHookFormTextField label="City" name="city" />
-                    <RHookFormSelect label='Country code' name='country_code' defaultValue='PL'>
+                    <RHookFormSelect label='Country code' name='country_code' defaultValue={state.yourDetails.country_code} >
                         {countryCodeInput.map((item) =>
                             <MenuItem key={item.label} value={item.value}>{item.value}</MenuItem>
                         )}
                     </RHookFormSelect>
-                    <SubmitButtonStyled type="submit" variant="contained" color="primary">
-                        Next
-                    </SubmitButtonStyled>
+                    <div className='row'>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginRight: '10px' }} onClick={() => navigate(`/${type}/personalinfo`)}>
+                            Previous
+                        </SubmitButtonStyled>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginLeft: '10px' }}>
+                            Next
+                        </SubmitButtonStyled>
+                    </div>
                 </form>
             </FormProvider>
         </Template>

@@ -6,13 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthContextProvider } from './AuthContext';
 import { SettingsProvider } from './Settings';
+import { StateMachineProvider } from 'little-state-machine';
 
 ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
           <SettingsProvider>
               <AuthContextProvider>
-                  <App />
+                  <StateMachineProvider>
+                     <App />
+                  </StateMachineProvider>
               </AuthContextProvider>
           </SettingsProvider>
       </BrowserRouter>

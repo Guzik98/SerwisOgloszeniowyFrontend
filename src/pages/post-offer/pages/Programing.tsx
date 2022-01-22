@@ -16,6 +16,7 @@ import Template from '../../Template';
 import { IFormOfferPrograming } from '../../../types/forms/post-offer-types/IFormOfferPrograming';
 import ClearIcon from '@mui/icons-material/Clear';
 import { red } from '@mui/material/colors';
+import { TemplateTypeChild } from '../../../types/forms/TemplateTypeChild';
 
 
 const skillsSchema = object({
@@ -29,15 +30,20 @@ const formSchema = object({
     language: array().of(skillsSchema)
 });
 
-const Programing = () => {
+const Programing = ({ type }: TemplateTypeChild) => {
     const navigate = useNavigate();
     const { actions, state } = useStateMachine({ updateOffer });
 
     const methods = useForm<IFormOfferPrograming>({
+        defaultValues: {
+            marker_icon: state.yourDetails.marker_icon,
+            experience_level: state.yourDetails.experience_level,
+            language: state.yourDetails.language
+        },
         resolver: yupResolver(formSchema)
     });
 
-    const { control } = methods;
+    const { control, getValues } = methods;
 
     const { fields, append, remove } = useFieldArray({
         control,
@@ -51,11 +57,13 @@ const Programing = () => {
             experience_level: data.experience_level,
             language: data.language
         });
-        navigate('/postoffer/skills');
+        navigate(`/${type}/skills`);
     };
 
     useEffect( () => {
-        append({ name: 'English', level: '' });
+        if (type === 'postoffer') {
+            append({ name: 'English', level: '' });
+        }
     }, []);
 
     return (
@@ -67,7 +75,7 @@ const Programing = () => {
                             <RHookFormSelect
                                 label='Main technology'
                                 name='marker_icon'
-                                defaultValue='java'>
+                                defaultValue={getValues('marker_icon')}>
                                 {programingLanguageIconArray.map((item) =>
                                     <MenuItem
                                         key={item.name}
@@ -107,7 +115,8 @@ const Programing = () => {
                                     <ReactHookFormTextField2 label="Language" name={`language.${index}.name`} index={index} />
                                 </div>
                                 <div className='level-big'>
-                                    <ReactHookFormTextField2 label="Level" name={`language.${index}.level`} index={index} select={true} >
+                                    <ReactHookFormTextField2 label="Level" name={`language.${index}.level`} index={index} select={true}
+                                                             defaultValue={getValues(`language.${index}.level`)} >
                                         {englishSkillInput.map((item) =>
                                             <MenuItem key={item.label} value={item.value}>{item.label}</MenuItem>
                                         )}
@@ -122,9 +131,14 @@ const Programing = () => {
                         </div>
                     )}
                     <Button  type="button" onClick={() => append({ name: '', level: 'A2' }) }> Add one more language</Button>
-                    <SubmitButtonStyled type="submit" variant="contained" color="primary">
-                        Next
-                    </SubmitButtonStyled>
+                    <div className='row'>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginRight: '10px' }} onClick={() => navigate(`/${type}/projects`)}>
+                            Previous
+                        </SubmitButtonStyled>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginLeft: '10px' }}>
+                            Next
+                        </SubmitButtonStyled>
+                    </div>
                 </form>
             </FormProvider>
         </Template>

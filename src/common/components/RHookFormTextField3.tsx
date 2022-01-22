@@ -4,7 +4,7 @@ import { TextField } from '@mui/material';
 import { IReactHookFormTextFieldProps2 } from '../../types/forms/buttons/ReactHookFormTextFieldProps2';
 
 
-const ReactHookFormTextField3: FC<IReactHookFormTextFieldProps2> = ({ label, name, type, index, rows, select, children, defaultValue }: IReactHookFormTextFieldProps2) => {
+const ReactHookFormTextField3: FC<IReactHookFormTextFieldProps2> = ({ label, name, type, index, rows, select, children, defaultValue, disable }: IReactHookFormTextFieldProps2) => {
     const {
         register,
         formState: { errors },
@@ -17,6 +17,7 @@ const ReactHookFormTextField3: FC<IReactHookFormTextFieldProps2> = ({ label, nam
             select={select}
             label={label}
             variant="outlined"
+            disabled={disable}
             type={type}
             rows={rows}
             defaultValue={defaultValue}

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { array, object, string } from 'yup';
+import { array, object, string, date } from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useStateMachine } from 'little-state-machine';
 import { updateOffer } from '../state-machine/yourDetailsAction';
@@ -11,22 +11,27 @@ import { Button } from '@mui/material';
 import { SubmitButtonStyled } from '../../../common/component-styles/SubmitButton';
 import Template from '../../Template';
 import RHookFormDataPicker from '../../../common/components/RHookFormDataPicker';
+import { TemplateTypeChild } from '../../../types/forms/TemplateTypeChild';
 
 const certificateSchema = object({
     name: string().required('this field is required'),
     institution: string().required('this field is required'),
+    end_date: (date() || string()).required('this field is required')
 });
 
 const formSchema = object({
     certificate: array().of(certificateSchema)
 });
 
-const Courses = () => {
+const Courses = ({ type }: TemplateTypeChild) => {
     const navigate = useNavigate();
 
     const { actions, state } = useStateMachine({ updateOffer });
 
     const methods = useForm<IFormOfferCertificate>({
+        defaultValues: {
+            certificate: state.yourDetails.certificate,
+        },
         resolver: yupResolver(formSchema)
     });
 
@@ -46,11 +51,13 @@ const Courses = () => {
             ...state.yourDetails,
             certificate: data.certificate
         });
-        navigate('/postoffer/experience');
+        navigate(`/${type}/experience`);
     };
 
     useEffect(() => {
-        append({ name: '', institution: '', end_date: new Date() });
+        if ( state.yourDetails.certificate === null){
+            append({ name: '', institution: '', end_date: new Date() });
+        }
     }, []);
 
     return (
@@ -64,15 +71,20 @@ const Courses = () => {
                             </h4>
                             <ReactHookFormTextField2 label="Certificate name" name={`certificate.${index}.name`} index={index}/>
                             <ReactHookFormTextField2 label="Institution" name={`certificate.${index}.institution`} index={index}/>
-                            <RHookFormDataPicker name={`certificate.${index}.end_date`} label={'End course date'} views={['year']} />
+                            <RHookFormDataPicker name={`certificate.${index}.end_date`} label={'End course date'} index={index} views={['year']} />
                             <Button onClick={() => remove(index)} > remove </Button>
                         </div>
 
                     )}
                     <Button  type="button" onClick={ () => append({ name: '', institution: '' }) }> Add one more certificate</Button>
-                    <SubmitButtonStyled type="submit" variant="contained" color="primary">
-                        Next
-                    </SubmitButtonStyled>
+                    <div className='row'>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginRight: '10px' }} onClick={() => navigate(`/${type}/education`)}>
+                            Previous
+                        </SubmitButtonStyled>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginLeft: '10px' }}>
+                            Next
+                        </SubmitButtonStyled>
+                    </div>
                 </form>
             </FormProvider>
         </Template>

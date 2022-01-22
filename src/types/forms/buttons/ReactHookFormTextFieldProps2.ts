@@ -8,4 +8,5 @@ export type IReactHookFormTextFieldProps2 ={
     select?: boolean,
     children?: JSX.Element[]
     multiline?: boolean
+    disable?: boolean
 }

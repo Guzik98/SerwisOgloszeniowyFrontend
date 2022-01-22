@@ -2,9 +2,10 @@ import axios from 'axios';
 import { GlobalState } from '../pages/post-offer/state-machine/type';
 import { UpperCase } from '../functions/upperCase';
 
-export const sendOffer = (data: GlobalState) => {
+export const sendEditedOffer = (data: GlobalState) => {
     console.log(data);
-    const url = 'http://localhost:3000/offer';
+    const url = `http://localhost:3000/offer/${data.yourDetails._id}`;
+    console.log(url);
     const today = new Date().toISOString();
 
     axios.post(url,  {
@@ -25,7 +26,7 @@ export const sendOffer = (data: GlobalState) => {
         education: data.yourDetails.education,
         certificate: data.yourDetails.certificate,
         experience: data.yourDetails.experience,
-        projects: data.yourDetails.projects,
+        project: data.yourDetails.projects,
         marker_icon: data.yourDetails.marker_icon,
         latitude: data.yourDetails.latitude,
         longitude: data.yourDetails.longitude,

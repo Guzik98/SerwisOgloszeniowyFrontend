@@ -43,6 +43,7 @@ export const useAuthProviderSettings = () => {
             getLocalStorage();
         });
     };
+
     const logout = () => {
         console.log('logout');
         sleep(2000).then(() => {

@@ -12,9 +12,10 @@ import './offer-tab.sass';
 type OffersTab = {
     props: OfferType
     propsEmployment: EmploymentType,
+    onClick?: (event?: any) => void
 };
 
-const OfferTab = ({ props, propsEmployment }: OffersTab ) => {
+const OfferTab = ({ props, propsEmployment, onClick }: OffersTab ) => {
     const { setViewport } = useSettings();
     const today = new Date().toISOString().split('T')[0];
 
@@ -30,7 +31,10 @@ const OfferTab = ({ props, propsEmployment }: OffersTab ) => {
 
     return (
         <div className="offer-border"
-             onClick={  () => { setViewportFunction(); }}
+             onClick={ () => {
+                 setViewportFunction();
+                 if (onClick) { onClick(); }
+             }}
         >
             <div className="offer-border-level2">
                 <div className="offer-border-level3">

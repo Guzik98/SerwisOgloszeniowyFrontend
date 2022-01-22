@@ -102,7 +102,7 @@ const OfferDetail = ( { offerDetailData }: Ffsfs ) => {
         return (
             <>
                 <div className='blue-left-side' >
-                    <p className='row-name'> CERTIFACTE </p>
+                    <p className='row-name'> CERTIFICATE </p>
                     <Divider/>
                     <div className='column'>
                         {certificate.map((item) => {
@@ -173,7 +173,7 @@ const OfferDetail = ( { offerDetailData }: Ffsfs ) => {
         return (
             <>
                 <div className='blue-left-side' >
-                    <p className='row-name'> Projects </p>
+                    <p className='row-name'> PROJECTS </p>
                     <Divider/>
                 </div>
                 <div className='white-right-side'>

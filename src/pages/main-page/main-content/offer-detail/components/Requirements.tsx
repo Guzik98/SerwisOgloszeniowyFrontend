@@ -13,7 +13,7 @@ const Requirements = ({ employment }: RequirementsType) => {
     return (
         <>
             <div className='blue-left-side' >
-                <p className='row-name'> Requirement </p>
+                <p className='row-name'> REQUIREMENTS </p>
                 <Divider/>
                 <div className='column'>
                     {employment.map((item) => {

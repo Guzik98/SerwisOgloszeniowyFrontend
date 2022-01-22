@@ -18,9 +18,11 @@ import { GeocodeType } from '../../../types/geocode';
 import { sendOffer } from '../../../services/send-offer';
 import { sendProfilePhoto } from '../../../services/send-photo';
 import { EmploymentType } from '../../../types/offer/employment';
+import { TemplateTypeChild } from '../../../types/forms/TemplateTypeChild';
+import { sendEditedOffer } from '../../../services/send-edited-offer';
 
 const employmentSchema = object({
-    type: string().required(),
+    type: string().required('this is required'),
     salary: object({
         from: number().min(1000).max(100000).required('this is required'),
         to: number().min(1000).max(100000).required('this is required'),
@@ -32,29 +34,31 @@ const formSchema = object({
     employment_type: array().of(employmentSchema)
 });
 
-const Employment = () => {
+const Employment = ({ type }: TemplateTypeChild) => {
+    console.log(type);
     const navigate = useNavigate();
 
     const { actions, state  } = useStateMachine({ updateOffer });
 
-
     const methods = useForm<IFormOfferEmployment>({
+        defaultValues: {
+            employment_type: state.yourDetails.employment_type,
+        },
         resolver: yupResolver(formSchema)
     });
 
-    const { control, setValue } = methods;
+    const { control, setValue, getValues } = methods;
 
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'employment_type'
     });
 
-    const [check, setCheck ] = useState<boolean[]>([true, true, true]);
-
     const [geocode, setGeocode] = useState<GeocodeType>(undefined);
     const [empType, setEmpType ] = useState<EmploymentType[]>();
     const [url, setUrl] = useState<string>();
     const [checkFlow, setCheckFlow] = useState<boolean>(false);
+    const [check, setCheck ] = useState<boolean[]>([false, false, false]);
 
     const submit: SubmitHandler<IFormOfferEmployment> = (data: IFormOfferEmployment) => {
         setEmpType(data.employment_type);
@@ -71,7 +75,7 @@ const Employment = () => {
         if ( geocode && url && empType && !checkFlow) {
             actions.updateOffer({
                 ...state.yourDetails,
-                photoUrl: url,
+                photo_url: url,
                 latitude: geocode?.latitude,
                 longitude: geocode?.longitude,
                 employment_type: empType,
@@ -81,31 +85,36 @@ const Employment = () => {
     }, [url, geocode, empType]);
 
     useEffect(() => {
-            if (checkFlow && state.yourDetails.photoUrl === url && state.yourDetails.latitude === geocode?.latitude && state.yourDetails.longitude == geocode?.longitude ){
-                sendOffer(state);
+            if (checkFlow && state.yourDetails.photo_url === url && state.yourDetails.latitude === geocode?.latitude && state.yourDetails.longitude == geocode?.longitude ){
+                if (type === 'postoffer') {
+                    sendOffer(state);
+                } else {
+                    sendEditedOffer(state);
+                }
                 navigate('/mainpage');
             }
     },  [checkFlow, actions.updateOffer]);
 
-
-
     useEffect(() => {
-        append({ type: ContractTypeEnum.PERMANENT, salary: null });
+        if (type === 'postoffer'){
+            append({ type: ContractTypeEnum.PERMANENT, salary: null });
+            setCheck( [true, true, true]);
+        }
     }, []);
+
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         if (e.target.checked){
-            let newCheck = [...check];
-            newCheck[index] = true;
-            setCheck(newCheck);
             setValue(`employment_type.${index}.salary`, null );
+            check[index] = true;
+            setCheck({ ...check });
         } else {
-            const newCheck = [...check];
-            newCheck[index] = false;
-            setCheck(newCheck);
+            check[index] = false;
+            setCheck({ ...check });
             setValue(`employment_type.${index}.salary.from`, 10000 );
             setValue(`employment_type.${index}.salary.to`, 100000 );
         }
+        console.log(getValues(`employment_type.${index}.salary`));
     };
 
     return (
@@ -117,21 +126,20 @@ const Employment = () => {
                             <h4>
                                 Employment {`${index + 1}`}
                             </h4>
-                            <ReactHookFormTextField2 label="Contract type" name={`employment_type.${index}.type`} index={index} select={true} defaultValue={ContractTypeEnum.PERMANENT}>
+                            <ReactHookFormTextField2 label="Contract type" name={`employment_type.${index}.type`} index={index} select={true} defaultValue={getValues(`employment_type.${index}.type`)}>
                                 {ContractInput.map((item)=>
-                                    <MenuItem key={item.label} value={item.value}>{item.label}</MenuItem>
+                                    <MenuItem disabled={item.value === getValues(`employment_type.${index - 1 }.type`) || item.value === getValues(`employment_type.${index - 2 }.type`)  } key={item.label} value={item.value}>{item.label}</MenuItem>
                                 )}
                             </ReactHookFormTextField2>
                             { !check[index] &&
                             <>
-                                <ReactHookFormTextField3 label="Salary from" name={`employment_type.${index}.salary.from`} type="number" index={index} />
-                                <ReactHookFormTextField3 label="Salary to" name={`employment_type.${index}.salary.to`}  type="number" index={index} />
+                                <ReactHookFormTextField3 label="Salary from" name={`employment_type.${index}.salary.from`} type="number"  index={index} />
+                                <ReactHookFormTextField3 label="Salary to" name={`employment_type.${index}.salary.to`}  type="number" index={index}  />
                             </>
                             }
                             <FormControlLabel
                                 label="Undisclosed salary"
                                 control={<Checkbox
-                                    checked={ check[index] }
                                     onChange={ (e) => onChange(e, index)}
                                 />}
                             />
@@ -139,11 +147,16 @@ const Employment = () => {
                         </div>
                     )}
                     { fields.length < 3 &&
-                    <Button  type="button" onClick={() => append({ type: ContractTypeEnum.PERMANENT, salary: null }) }> Add one contract type</Button>
+                    <Button  type="button" onClick={() => append({}) }> Add one contract type</Button>
                     }
-                    <SubmitButtonStyled type="submit" variant="contained" color="primary">
-                        Send
-                    </SubmitButtonStyled>
+                    <div className='row'>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginRight: '10px' }} onClick={() => navigate(`/${type}/skills`)}>
+                            Previous
+                        </SubmitButtonStyled>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginLeft: '10px' }}>
+                            Send
+                        </SubmitButtonStyled>
+                    </div>
                 </form>
             </FormProvider>
         </Template>

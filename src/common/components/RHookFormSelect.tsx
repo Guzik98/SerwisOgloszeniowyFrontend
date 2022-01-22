@@ -6,7 +6,10 @@ import { IReactHookFormTextFieldProps } from '../../types/forms/buttons/ReactHoo
 
 export const RHookFormSelect: FC<IReactHookFormTextFieldProps> = ({ label, name, defaultValue, children }: IReactHookFormTextFieldProps ) => {
 
-    const { register } = useFormContext();
+    const {
+        register,
+        formState: { errors },
+    } = useFormContext();
 
     return (
         <TextField
@@ -16,6 +19,8 @@ export const RHookFormSelect: FC<IReactHookFormTextFieldProps> = ({ label, name,
             variant="outlined"
             fullWidth
             margin="dense"
+            error={!!errors[name]}
+            helperText={errors[name]?.message ?? ''}
             defaultValue={defaultValue}
         >
             {children}

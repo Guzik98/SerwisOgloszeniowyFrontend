@@ -11,11 +11,12 @@ import { LanguageType } from '../../../types/offer/languague';
 export function updateOffer(
     state: GlobalState,
     payload: {
+        _id: string | null,
         name: string,
         surname: string,
-        shortDescription: string,
+        short_personal_description: string,
         photo: File | undefined
-        photoUrl: string | null
+        photo_url: string | null
         street: string,
         city: string,
         country_code: string,

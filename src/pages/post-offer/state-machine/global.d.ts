@@ -29,7 +29,7 @@ declare module "little-state-machine" {
             education: EducationType[] | null
             certificate: CertificateType[] | null
             experience: ExperienceType[] | null
-            projects: ProjectType[] | null
+            project: ProjectType[] | null
             marker_icon: string;
             language: LanguageType[]
             experience_level: ExperienceLevelEnum

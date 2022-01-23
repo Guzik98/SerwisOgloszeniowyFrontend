@@ -42,7 +42,7 @@ const PostOffer = (): JSX.Element => {
             phone_number: 0,
             photo: undefined,
             photo_url: null,
-            projects: null,
+            project: null,
             short_personal_description: '',
             skills: [],
             street: '',
@@ -59,7 +59,7 @@ const PostOffer = (): JSX.Element => {
                 <Route path="education" element={<Education type={'postoffer'} />} />
                 <Route path="courses" element={<Courses type={'postoffer'}/>} />
                 <Route path="experience" element={<Experience type={'postoffer'} />} />
-                <Route path="projects" element={<Projects type={'postoffer'}/>} />
+                <Route path="project" element={<Projects type={'postoffer'}/>} />
                 <Route path="programing" element={<Programing type={'postoffer'}/>} />
                 <Route path="skills" element={<Skills type={'postoffer'} />} />
                 <Route path="employment" element={<Employment type={'postoffer'} />} />

@@ -1,5 +1,5 @@
 import { CertificateType } from "../../offer/certificateType";
 
-export  type IFormOfferCertificate = {
+export type IFormOfferCertificate = {
     certificate: CertificateType[] | null
 }

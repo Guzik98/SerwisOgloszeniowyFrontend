@@ -72,8 +72,8 @@ const MoreFilersPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
 
     const clear = () => {
         setFilters({ ...filters,
-            fromSalary: value[0],
-            toSalary: value[1],
+            fromSalary: 0,
+            toSalary: 100000,
             employmentType: ContractTypeEnum.ALL,
             seniority: ExperienceLevelEnum.ALL
         });

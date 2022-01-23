@@ -5,6 +5,7 @@ import { ExperienceLevelEnum } from './enums/experience_level';
 import { ContractTypeEnum } from './enums/contract-enum';
 import { View } from './types/view';
 import axios from 'axios';
+import { SortByEnum } from './enums/sortby-enum';
 
 export const SettingsContext = createContext<SettingsContextData | null>(null);
 
@@ -18,7 +19,7 @@ const useProviderSettings = () => {
         fromSalary: 0,
         toSalary: 100000,
         employmentType: ContractTypeEnum.ALL,
-        sortBy: 'latest',
+        sortBy: SortByEnum.LATEST,
         withSalary: false
     });
     const [ viewport, setViewport ] = useState<View>({

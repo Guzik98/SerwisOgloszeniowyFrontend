@@ -6,26 +6,43 @@ import { filterFunction } from '../../../functions/filtering';
 import Loading from './loading/Loading';
 
 import { OfferType } from '../../../types/offer';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import OfferDetail from './offer-detail/OfferDetail';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useSettings } from '../../../Settings';
 
 const Content = () => {
     const filtered = filterFunction();
+    const navigate = useNavigate();
+    const { setViewport, viewport } = useSettings();
 
     const [offerDetailData, setOfferDetailData] = useState<OfferType>();
 
     return (
         <div className='main-content'>
+            {offerDetailData &&
+                <div className='back'>
+                    <ArrowBackIcon sx={{ color: 'white' }}  onClick={() => {
+                        navigate('/mainpage');
+                        setViewport({
+                            ...viewport,
+                            latitude: 52.237049,
+                            longitude: 21.017532,
+                            zoom: 5,
+                        });
+                    }}/>
+                </div>
+            }
             { filtered !== undefined
                 ? <>
                     <Routes>
                         <Route path="/" element={<Offers filtered={filtered} setOfferDetailData={setOfferDetailData}/>}/>
                         {offerDetailData
                             ? <Route path="details" element={<OfferDetail offerDetailData={offerDetailData}/>}/>
-                            : <Route path="details" element={<Loading/>}/>
+                            :   <Route path="details" element={<Loading/>}/>
                         }
                     </Routes>
-                    <Map filtered={filtered}/>
+                    <Map filtered={filtered} setOfferDetailData={setOfferDetailData}/>
                     </>
                 : <Loading/>
             }

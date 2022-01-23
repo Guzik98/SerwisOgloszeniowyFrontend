@@ -5,9 +5,10 @@ import { useWindowSize } from '../../../../functions/handle-resize';
 import { OfferType } from '../../../../types/offer';
 import ReactMapGL, { Marker, NavigationControl, Popup } from 'react-map-gl';
 import './map.sass';
-import { FilteredType } from '../../../../types/filtered';
+import { useNavigate } from 'react-router-dom';
 
-export const Map = ({ filtered }: FilteredType): JSX.Element =>  {
+export const Map = ({ filtered, setOfferDetailData }: { filtered:OfferType[], setOfferDetailData: React.Dispatch<React.SetStateAction<OfferType | undefined>> }): JSX.Element =>  {
+    const navigate = useNavigate();
     const size: ScreenSize = useWindowSize();
     const { viewport, setViewport } = useSettings();
     const [ selectedOffer, setSelectedOffer ] = useState<OfferType | null>(null);
@@ -29,7 +30,7 @@ export const Map = ({ filtered }: FilteredType): JSX.Element =>  {
     };
 
     return (
-        <div className='map' style={style}>
+        <div className='map'>
             <ReactMapGL
                 {...viewport}
                 style={style}
@@ -47,8 +48,9 @@ export const Map = ({ filtered }: FilteredType): JSX.Element =>  {
                             <button className="market-btn"
                                     onMouseOver={ () =>setSelectedOffer(item) }
                                     onMouseLeave={ () =>setSelectedOffer(null) }
-                                    onClick={  () => {
-                                        // setUrlDetail(`https://justjoin.it/api/offers/${offer.id}`);
+                                    onClick={ () => {
+                                        navigate('/mainpage/details');
+                                        setOfferDetailData(item);
                                         setViewport({
                                             latitude: +item.latitude,
                                             longitude: +item.longitude,
@@ -56,11 +58,11 @@ export const Map = ({ filtered }: FilteredType): JSX.Element =>  {
                                             height: '98%',
                                             zoom: 16,
                                         });
-                                        // setOpenDetailComponent(true);
-                                    } }
+                                    }}
                             >
                                 <img className = 'pointer' style={{ maxWidth: '24px', maxHeight: '24px' }}
                                      src={`${item.photo_url}`}
+                                    alt={'crush'}
                                 />
                             </button>
                         </Marker>
@@ -69,7 +71,7 @@ export const Map = ({ filtered }: FilteredType): JSX.Element =>  {
                 { selectedOffer && <Popup longitude={+selectedOffer.longitude} latitude={+selectedOffer.latitude}>
                     <div className="popup-marker">
                         <div className="popup-logo">
-                            <img src={selectedOffer?.photo_url} alt='logo'/>
+                            <img src={selectedOffer?.photo_url} alt='photo'/>
                         </div>
                         <div className="popup-content">
                             <span>{ selectedOffer.title }</span>

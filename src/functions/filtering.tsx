@@ -2,11 +2,13 @@ import { useSettings } from '../Settings';
 import { OfferType } from '../types/offer';
 import { ExperienceLevelEnum } from '../enums/experience_level';
 import { ContractTypeEnum } from '../enums/contract-enum';
-
+import { SortByEnum } from '../enums/sortby-enum';
 
 export const  filterFunction = (): OfferType[] | undefined => {
     const { filters, offers } = useSettings();
     let filtered = offers;
+
+    console.log(filters.sortBy);
 
     if ( filters.mainTech !== 'All'){
         filtered = filtered?.filter((item) => {
@@ -36,39 +38,32 @@ export const  filterFunction = (): OfferType[] | undefined => {
     }
 
     if ( filters.fromSalary !== 0 || filters.toSalary !== 100000 ){
-        filtered = filtered?.map((element) => {
-            return { ...element,
+        filtered = filtered?.filter((element) => {
+            const item =  { ...element,
                 employment_type: element.employment_type.filter((subElement) => {
                     if (subElement.salary  !== null){
                         return subElement.salary.from >= filters.fromSalary &&  subElement.salary.to <= filters.toSalary;
-                    } else {
-                        return false;
                     }
                 })
             };
+            return item.employment_type.length > 0;
         });
     }
 
-    if ( filters.withSalary || filters.sortBy != 'latest' ){
-        filtered = filtered?.map((item) => {
-            return {
+    if ( filters.withSalary || filters.sortBy !== SortByEnum.LATEST ){
+        console.log('here');
+        filtered = filtered?.filter((item) => {
+            const item2 =  {
                 ...item,
                 employment_type: item.employment_type.filter((emp) => {
                     return emp.salary !== null;
                 })
             };
+            return item2.employment_type.length > 0;
         });
     }
 
-    if ( filters.sortBy !== 'latest') {
-        filtered = filtered?.map((item) => {
-            return {
-                ...item,
-                employment_type: item.employment_type.filter((emp) => {
-                    return emp.salary !== null;
-                })
-            };
-        });
+    if ( filters.sortBy !== SortByEnum.LATEST ) {
 
         filtered = filtered?.sort((a, b): number => {
             const aHelpTo = a.employment_type[0].salary?.to;
@@ -76,14 +71,14 @@ export const  filterFunction = (): OfferType[] | undefined => {
             const bHelpTo = b.employment_type[0].salary?.to;
             const bHelpFrom = b.employment_type[0].salary?.from;
             if ( aHelpTo && aHelpFrom && bHelpFrom && bHelpTo){
-                if (filters.sortBy === 'Highest Salary') {
+                if (filters.sortBy === SortByEnum.HIGHEST) {
                     if (aHelpTo === bHelpTo){
                         return (bHelpFrom - aHelpFrom);
                     } else {
                         return (bHelpTo - aHelpTo);
                     }
                 }
-                if (filters.sortBy === 'Lowest Salary') {
+                if (filters.sortBy === SortByEnum.LOWEST) {
                     if (bHelpTo === aHelpTo){
                         return (aHelpFrom - bHelpFrom);
                     } else {
@@ -95,7 +90,7 @@ export const  filterFunction = (): OfferType[] | undefined => {
         });
     }
 
-    if ( filters.sortBy == 'latest') {
+    if ( filters.sortBy == SortByEnum.LATEST) {
         filtered = filtered?.sort(function (a, b) {
             return ( a.published_at > b.published_at) ? -1 : ((a.published_at < b.published_at ) ? 1 : 0);
         });

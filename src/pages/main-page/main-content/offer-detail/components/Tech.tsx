@@ -2,12 +2,9 @@ import React from 'react';
 import { Divider } from '@mui/material';
 import { SkillsType } from '../../../../../types/offer/skill';
 import './Tech.sass';
+import { v4 as uuidv4 } from 'uuid';
 
-type TechType = {
-    skill: SkillsType[]
-};
-
-const Tech = ( { skill } : TechType) => {
+const Tech = ( { skill }: { skill: SkillsType[] }) => {
 
     const SkillComponent = (props : { name: string, level: number }) : JSX.Element => {
         let skillLevelName  = '';
@@ -58,7 +55,7 @@ const Tech = ( { skill } : TechType) => {
                 <div className="tech-content">
                 <div className="stack">
                     { skill.map((item ) => {
-                        return ( <SkillComponent key={item.name} name={item.name} level={item.level}  /> );
+                        return ( <SkillComponent key={uuidv4()} name={item.name} level={item.level}  /> );
                     })}
                 </div>
                 </div>

@@ -63,11 +63,13 @@ const Employment = ({ type }: TemplateTypeChild) => {
     const submit: SubmitHandler<IFormOfferEmployment> = (data: IFormOfferEmployment) => {
         setEmpType(data.employment_type);
         getLocation(state.yourDetails.street + ', ' + state.yourDetails.city + ', ' + state.yourDetails.country_code, setGeocode);
-        if (state.yourDetails.photo !== undefined) {
+        if (state.yourDetails.photo !== undefined ) {
             sendProfilePhoto(state.yourDetails.photo)
                 .then(response => { setUrl(response); } );
-        } else {
+        } else if ( state.yourDetails.photo_url !== null) {
             setUrl('http://localhost:3000/profile/logo/default-avatar.jpg');
+        } else {
+            setUrl(state.yourDetails.photo_url!);
         }
     };
 
@@ -101,7 +103,6 @@ const Employment = ({ type }: TemplateTypeChild) => {
             setCheck( [true, true, true]);
         }
     }, []);
-
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         if (e.target.checked){

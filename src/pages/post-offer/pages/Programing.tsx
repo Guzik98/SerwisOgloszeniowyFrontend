@@ -17,6 +17,7 @@ import { IFormOfferPrograming } from '../../../types/forms/post-offer-types/IFor
 import ClearIcon from '@mui/icons-material/Clear';
 import { red } from '@mui/material/colors';
 import { TemplateTypeChild } from '../../../types/forms/TemplateTypeChild';
+import { ExperienceLevelEnum } from '../../../enums/experience_level';
 
 
 const skillsSchema = object({
@@ -62,7 +63,7 @@ const Programing = ({ type }: TemplateTypeChild) => {
 
     useEffect( () => {
         if (type === 'postoffer') {
-            append({ name: 'English', level: '' });
+            append({ name: 'English', level: 'A2' });
         }
     }, []);
 
@@ -96,7 +97,7 @@ const Programing = ({ type }: TemplateTypeChild) => {
                         <RHookFormSelect
                             label='Experience'
                             name='experience_level'
-                            defaultValue='mid'>
+                            defaultValue={getValues('experience_level') || ExperienceLevelEnum.MID}>
                             {experienceLevelInput.map((item) =>
                                 <MenuItem key={item.label} value={item.value}>{item.label}</MenuItem>
                             )}
@@ -116,7 +117,7 @@ const Programing = ({ type }: TemplateTypeChild) => {
                                 </div>
                                 <div className='level-big'>
                                     <ReactHookFormTextField2 label="Level" name={`language.${index}.level`} index={index} select={true}
-                                                             defaultValue={getValues(`language.${index}.level`)} >
+                                                             defaultValue={getValues(`language.${index}.level`) || 'A2'} >
                                         {englishSkillInput.map((item) =>
                                             <MenuItem key={item.label} value={item.value}>{item.label}</MenuItem>
                                         )}
@@ -132,7 +133,7 @@ const Programing = ({ type }: TemplateTypeChild) => {
                     )}
                     <Button  type="button" onClick={() => append({ name: '', level: 'A2' }) }> Add one more language</Button>
                     <div className='row'>
-                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginRight: '10px' }} onClick={() => navigate(`/${type}/projects`)}>
+                        <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginRight: '10px' }} onClick={() => navigate(`/${type}/project`)}>
                             Previous
                         </SubmitButtonStyled>
                         <SubmitButtonStyled type="submit" variant="contained" color="primary" sx={{ marginLeft: '10px' }}>

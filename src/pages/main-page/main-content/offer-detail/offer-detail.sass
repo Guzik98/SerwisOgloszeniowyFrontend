@@ -1,10 +1,12 @@
+.background
+  position: absolute
+  padding-top: 20px
 .offer-detail
   display: grid
   grid-template-columns: 30% 70%
   grid-auto-rows: min-content
   background: linear-gradient(to right, #beedf3 30%, white 30%)
   position: relative
-
   overflow-y: auto
   will-change: transform
   &::-webkit-scrollbar
@@ -17,6 +19,7 @@
     display: flex
     flex-direction: row
     align-items: center
+    word-wrap: break-word
   .column
     display: flex
     flex-direction: column

@@ -51,7 +51,7 @@ const Experience = ({ type }: TemplateTypeChild) => {
             ...state.yourDetails,
             experience: data.experience
         });
-        navigate(`/${type}/projects`);
+        navigate(`/${type}/project`);
     };
 
     const [tillNow, setTillNow] = useState<boolean[]>([true]);

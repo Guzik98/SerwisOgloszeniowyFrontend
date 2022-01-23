@@ -4,10 +4,7 @@ import { PopOutButtons, sortByButtons } from './PopOutButtons';
 import { DialogContent, DialogTitle, Divider } from '@mui/material';
 import { HandlePopOut } from '../../../../../types/pop0ut';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-
-export type ButtonType = {
-    name: string;
-};
+import { SortByEnum } from '../../../../../enums/sortby-enum';
 
 const SortByPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
     return (
@@ -24,10 +21,10 @@ const SortByPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
 
             <DialogContent>
                 <div className="sort-by-pop-out-body">
-                    {sortByButtons.map(({ name }: ButtonType) =>
+                    {sortByButtons.map(({ name, value }: { name: string, value: SortByEnum }) =>
                         <div onClick={handleClose} key={name} className="btn-border">
                             <PopOutButtons
-                                name={name} key={name}/>
+                                name={name} key={name} value={value}/>
                         </div>)
                     }
                 </div>

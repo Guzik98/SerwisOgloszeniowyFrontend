@@ -2,14 +2,10 @@ import React from 'react';
 import { EmploymentType } from '../../../../../types/offer/employment';
 import { Divider } from '@mui/material';
 import { UpperCase } from '../../../../../functions/upperCase';
+import { v4 as uuidv4 } from 'uuid';
+import { contractReturn } from '../../../../../functions/contract-return';
 
-type RequirementsType = {
-    employment: EmploymentType[]
-};
-
-
-
-const Requirements = ({ employment }: RequirementsType) => {
+const Requirements = ({ employment }: { employment: EmploymentType[] }) => {
     return (
         <>
             <div className='blue-left-side' >
@@ -17,7 +13,11 @@ const Requirements = ({ employment }: RequirementsType) => {
                 <Divider/>
                 <div className='column'>
                     {employment.map((item) => {
-                            return (<p key={item.type}>{ UpperCase(item.type) }</p>);
+                            return (
+                                <div key={uuidv4()} >
+                                    <p>{ UpperCase(contractReturn(item.type)) }</p>
+                                </div>
+                            );
                         }
                     )}
                 </div>
@@ -27,12 +27,12 @@ const Requirements = ({ employment }: RequirementsType) => {
                 <div className='contact-data'>
                     {employment.map((item) => {
                         return (
-                            <>
-                                <p className='row' key={item.type}> { item.salary !== null ? item.salary?.from.toString().slice(0, -3) + ' ' + item.salary?.from.toString().slice(-3)  + ' - '
+                            <div key={uuidv4()} >
+                                <p className='row' > { item.salary !== null ? item.salary?.from.toString().slice(0, -3) + ' ' + item.salary?.from.toString().slice(-3)  + ' - '
                                     + item.salary?.to.toString().slice(0, -3) + ' ' + item.salary?.to.toString().slice(-3)  + ' ' + 'PLN'
                                     : 'Undisclosed Salary' }</p>
 
-                            </>
+                            </div>
                         );
                     })}
                 </div>

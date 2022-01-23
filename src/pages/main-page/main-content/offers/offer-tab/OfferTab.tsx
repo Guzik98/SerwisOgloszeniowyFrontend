@@ -8,14 +8,12 @@ import { SkillsType } from '../../../../../types/offer/skill';
 import CompanyIconOffer from '../../../../../assets/icons/CompanyIconOffer';
 import PointerIconOffer from '../../../../../assets/icons/PointerIconOffer';
 import './offer-tab.sass';
+import { v4 as uuidv4 } from 'uuid';
 
-type OffersTab = {
-    props: OfferType
+const OfferTab = ({ props, propsEmployment }: {
+    props: OfferType,
     propsEmployment: EmploymentType,
-    onClick?: (event?: any) => void
-};
-
-const OfferTab = ({ props, propsEmployment, onClick }: OffersTab ) => {
+}) => {
     const { setViewport } = useSettings();
     const today = new Date().toISOString().split('T')[0];
 
@@ -31,10 +29,7 @@ const OfferTab = ({ props, propsEmployment, onClick }: OffersTab ) => {
 
     return (
         <div className="offer-border"
-             onClick={ () => {
-                 setViewportFunction();
-                 if (onClick) { onClick(); }
-             }}
+             onClick={ () => setViewportFunction() }
         >
             <div className="offer-border-level2">
                 <div className="offer-border-level3">
@@ -96,7 +91,7 @@ const OfferTab = ({ props, propsEmployment, onClick }: OffersTab ) => {
                             <div className="bottom-info-skills">
                                 <MediaQuery minWidth={1025}>
                                     {props.skills.map((type: SkillsType) =>
-                                        <span key={ type.name } className="skills">{type.name}</span>
+                                        <span key={ uuidv4() } className="skills">{type.name}</span>
                                     )}
                                 </MediaQuery>
                             </div>

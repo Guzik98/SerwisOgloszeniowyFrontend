@@ -8,12 +8,13 @@ import OfferTab from './offer-tab/OfferTab';
 import './offers.sass';
 import { v4 as uuidv4 } from 'uuid';
 import { useAuth } from '../../../../AuthContext';
-import { OfferComponentType } from '../../../../types/offer-component';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
+import { OfferType } from '../../../../types/offer';
+import { deleteOffer } from '../../../../services/delete-offer';
 
-const Offers = ({ filtered, setOfferDetailData }: OfferComponentType) => {
+const Offers = ({ filtered, setOfferDetailData }: { filtered: OfferType[], setOfferDetailData: React.Dispatch<React.SetStateAction<OfferType | undefined>> }) => {
     const size: ScreenSize = useWindowSize();
     const navigate = useNavigate();
     const { filters, setFilters, offers } = useSettings();
@@ -100,11 +101,24 @@ const Offers = ({ filtered, setOfferDetailData }: OfferComponentType) => {
                                  return item.employment_type.map((propsEmployment, index) => {
                                      if (index === 0) {
                                          return (
-                                             <div className={'column'}>
-                                                 <OfferTab  onClick={ () => { setOfferDetailData(item); navigate('/mainpage/details'); } }  props={item} propsEmployment={propsEmployment} key={item._id + uuidv4()}/>
-                                                 <div className={'edit-remove'}>
-                                                     <AddIcon  />
-                                                     <RemoveIcon onClick={ () => navigate('/edit',  { state: { ...item } } ) }/>
+                                             <div  key={uuidv4()} style={{ display: 'grid', gridTemplateColumns: '20fr 1fr' }}>
+                                                 <div className={'column'}
+                                                      onClick={ () => {
+                                                         setOfferDetailData(item);
+                                                         navigate('/mainpage/details');
+                                                 }}>
+                                                     <OfferTab props={item} propsEmployment={propsEmployment} />
+                                                 </div>
+                                                 <div className='edit-remove'>
+                                                     <AddIcon onClick={ () => navigate('/edit',  { state: { ...item } }) } />
+                                                     <RemoveIcon onClick={ () => {
+                                                         console.log('here');
+                                                         deleteOffer(item._id);
+                                                         offers?.map((filter) => {
+                                                             return filter._id !== item._id;
+                                                         });
+                                                     }}
+                                                     />
                                                  </div>
                                              </div>
                                          );
@@ -117,7 +131,12 @@ const Offers = ({ filtered, setOfferDetailData }: OfferComponentType) => {
                          return props.employment_type.map((propsEmployment, index) => {
                              if (index === 0) {
                                  return (
-                                     <div onClick={ () => { setOfferDetailData(props); navigate('/mainpage/details'); } }>
+                                     <div  key={props._id + uuidv4()}
+                                           onClick={ () => {
+                                               setOfferDetailData(props);
+                                               navigate('/mainpage/details');
+                                           }}
+                                     >
                                          <OfferTab props={props} propsEmployment={propsEmployment} key={props._id + uuidv4()} />
                                      </div>
                                  );
@@ -126,7 +145,6 @@ const Offers = ({ filtered, setOfferDetailData }: OfferComponentType) => {
                     })
                 }
             </div>
-
         </div>
     );
 };

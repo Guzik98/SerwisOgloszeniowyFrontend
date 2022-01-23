@@ -18,7 +18,7 @@ const projectSchema = object({
 });
 
 const formSchema = object({
-    projects: array().of(projectSchema)
+    project: array().of(projectSchema)
 });
 
 const Projects = ({ type }: TemplateTypeChild) => {
@@ -28,7 +28,7 @@ const Projects = ({ type }: TemplateTypeChild) => {
 
     const methods = useForm<IFormOfferProject>({
         defaultValues:{
-            projects: state.yourDetails.projects,
+            project: state.yourDetails.project,
         },
         resolver: yupResolver(formSchema)
     });
@@ -37,23 +37,23 @@ const Projects = ({ type }: TemplateTypeChild) => {
 
     const { fields, append, remove } = useFieldArray({
         control,
-        name: 'projects',
+        name: 'project',
     });
 
     const submit: SubmitHandler<IFormOfferProject> = (data: IFormOfferProject) => {
-        if ( data.projects?.length === 0) {
-            data.projects = null;
+        if ( data.project?.length === 0) {
+            data.project = null;
         }
         actions.updateOffer({
             ...state.yourDetails,
-            projects: data.projects
+            project: data.project
         });
         console.log(state.yourDetails);
         navigate(`/${type}/programing`);
     };
 
     useEffect(() => {
-        if (state.yourDetails.projects === null){
+        if (state.yourDetails.project === null){
             append({ project_name: '', description:'' });
         }
     }, []);
@@ -67,8 +67,8 @@ const Projects = ({ type }: TemplateTypeChild) => {
                             <h4>
                                 Projects {`${index + 1}`}
                             </h4>
-                            <ReactHookFormTextField2 label="Project name" name={`projects.${index}.project_name`} index={index} />
-                            <ReactHookFormTextField2 label="Project description" name={`projects.${index}.description`} index={index}  rows={4}  />
+                            <ReactHookFormTextField2 label="Project name" name={`project.${index}.project_name`} index={index} />
+                            <ReactHookFormTextField2 label="Project description" name={`project.${index}.description`} index={index}  rows={4}  />
                             <Button onClick={() => remove(index)} > remove </Button>
                         </div>
                     )}

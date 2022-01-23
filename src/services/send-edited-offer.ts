@@ -26,7 +26,7 @@ export const sendEditedOffer = (data: GlobalState) => {
         education: data.yourDetails.education,
         certificate: data.yourDetails.certificate,
         experience: data.yourDetails.experience,
-        project: data.yourDetails.projects,
+        project: data.yourDetails.project,
         marker_icon: data.yourDetails.marker_icon,
         latitude: data.yourDetails.latitude,
         longitude: data.yourDetails.longitude,

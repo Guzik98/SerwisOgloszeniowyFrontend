@@ -3,7 +3,7 @@ import React from 'react';
 import MediaQuery from 'react-responsive';
 import { useSettings } from '../../../../../Settings';
 import { createStyles, makeStyles } from '@mui/styles';
-import { ButtonType } from './SortByPopOut';
+import { SortByEnum } from '../../../../../enums/sortby-enum';
 const useStyles = makeStyles(() =>
     createStyles({
         root: {
@@ -31,25 +31,25 @@ const useStyles = makeStyles(() =>
 );
 
 export const sortByButtons = [
-    { name: 'Latest' },
-    { name: 'Highest Salary' },
-    { name: 'Lowest Salary' },
+    { name: 'latest', value: SortByEnum.LATEST },
+    { name: 'highest Salary', value: SortByEnum.HIGHEST },
+    { name: 'lowest Salary', value: SortByEnum.LOWEST },
 ];
 
 
-export const PopOutButtons = (props : ButtonType): JSX.Element=> {
+export const PopOutButtons = (props: { name: string, value: SortByEnum }): JSX.Element=> {
     const classes = useStyles();
     const { filters, setFilters } = useSettings();
 
 
     const handleClose = () => {
-        setFilters({ ...filters, sortBy: props.name });
+        setFilters({ ...filters, sortBy: props.value });
     };
 
     return (
         <>
             <MediaQuery maxWidth={1025}>
-                <div className={`${ filters.sortBy ===  props.name ? 'sort-active sort-by-link' : 'sort-by-link' }` }>
+                <div className={`${ filters.sortBy ===  props.value ? 'sort-active sort-by-link' : 'sort-by-link' }` }>
                     <Button
                         onClick={handleClose}
                         classes={{
@@ -60,7 +60,7 @@ export const PopOutButtons = (props : ButtonType): JSX.Element=> {
                 </div>
             </MediaQuery>
             <MediaQuery minWidth={1025}>
-                <div className={`${ filters.sortBy ===  props.name ? 'false sort-by-link' : 'sort-by-link' }` }>
+                <div className={`${ filters.sortBy ===  props.value ? 'false sort-by-link' : 'sort-by-link' }` }>
                     <Button
                         onClick={handleClose}
                         classes={{

@@ -37,7 +37,7 @@ const EditOffer = (): JSX.Element => {
             <Route path="education" element={<Education type={'edit'} />} />
             <Route path="courses" element={<Courses type={'edit'} />} />
             <Route path="experience" element={<Experience type={'edit'} />} />
-            <Route path="projects" element={<Projects type={'edit'}/>} />
+            <Route path="project" element={<Projects type={'edit'}/>} />
             <Route path="programing" element={<Programing type={'edit'} />} />
             <Route path="skills" element={<Skills type={'edit'} />} />
             <Route path="employment" element={<Employment  type={'edit'} />} />

@@ -39,7 +39,7 @@ export const useStyles = makeStyles(() =>
     })
 );
 
-const Location = () => {
+const Location = (): JSX.Element => {
     const classes = useStyles();
     const size: ScreenSize = useWindowSize();
     const { filters } = useSettings();

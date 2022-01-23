@@ -8,6 +8,7 @@ import SortByPopOut from './SortByPopOut';
 import './sortBy.sass';
 import { useWindowSize } from '../../../../../functions/handle-resize';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { SortByEnum } from '../../../../../enums/sortby-enum';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -49,7 +50,7 @@ const SortBy = () => {
             <ButtonComponent
                 onClick={handleClick}
                 height={ size.width > 102 ? '30px' : undefined }
-                filter={ size.width < 1025 ? filters.sortBy == 'Latest' : true }
+                filter={ size.width < 1025 ? filters.sortBy == SortByEnum.LATEST : true }
                 childrens={ size.width > 1025 ?
                     <span className="sort-by-label">
                        Sort by: {filters.sortBy}

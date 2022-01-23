@@ -6,13 +6,12 @@ import {  IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { StyledDivider } from '../../../common/component-styles/Divider';
+import { UpperCase } from '../../../functions/upperCase';
 
-
-const Header = () => {
-
+const Header = (): JSX.Element => {
     const { username, loggedIn, logout } = useAuth();
-
     const navigate = useNavigate();
+
     return (
         <div className="header">
             <div className="header-container">
@@ -32,12 +31,17 @@ const Header = () => {
                         </>
                     }
                     <StyledDivider  orientation="vertical" flexItem/>
-                    { username ? <SubmitButtonStyled >{username}</SubmitButtonStyled> :
-                        <SubmitButtonStyled onClick={() => navigate('/login')}>Sign in</SubmitButtonStyled>}
-                    <StyledDivider orientation="vertical" flexItem/>
-                    <SubmitButtonStyled onClick={() =>  navigate('/postoffer')}>
-                        Post offer
-                    </SubmitButtonStyled>
+                    { username
+                        ? <SubmitButtonStyled >{ UpperCase(username) }</SubmitButtonStyled>
+                        : <SubmitButtonStyled onClick={() => navigate('/login')}>Sign in</SubmitButtonStyled>}
+                    { loggedIn &&
+                        <>
+                            <StyledDivider orientation="vertical" flexItem/>
+                            <SubmitButtonStyled onClick={() =>  navigate('/postoffer')}>
+                                Post offer
+                            </SubmitButtonStyled>
+                        </>
+                    }
                     <StyledDivider  orientation="vertical" flexItem/>
                     <IconButton
                         size="large"

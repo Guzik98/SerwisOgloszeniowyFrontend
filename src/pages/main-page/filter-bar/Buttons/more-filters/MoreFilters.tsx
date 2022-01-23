@@ -12,7 +12,7 @@ import MoreFilersPopOut from './MoreFilersPopOut';
 import './moreFilters.sass';
 
 
-const MoreFilters = () => {
+const MoreFilters = (): JSX.Element=> {
     const { filters } = useSettings();
     const size: ScreenSize = useWindowSize();
     const [open, setOpen] = React.useState(false);

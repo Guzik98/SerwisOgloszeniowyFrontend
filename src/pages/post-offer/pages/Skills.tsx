@@ -55,6 +55,7 @@ const Skills = ({ type }: TemplateTypeChild) => {
             append({ name: state.yourDetails.marker_icon, level: 2 });
         }
     }, []);
+
     return (
         <Template header={'Skills'}>
             <FormProvider {...methods}>

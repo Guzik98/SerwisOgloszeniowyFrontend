@@ -4,7 +4,6 @@ import { Map } from './map/Map';
 import './content.sass';
 import { filterFunction } from '../../../functions/filtering';
 import Loading from './loading/Loading';
-
 import { OfferType } from '../../../types/offer';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import OfferDetail from './offer-detail/OfferDetail';
@@ -12,9 +11,11 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useSettings } from '../../../Settings';
 
 const Content = () => {
-    const filtered = filterFunction();
-    const navigate = useNavigate();
+    const { filters, offers } = useSettings();
     const { setViewport, viewport } = useSettings();
+    const navigate = useNavigate();
+
+    const filtered = filterFunction(filters, offers);
 
     const [offerDetailData, setOfferDetailData] = useState<OfferType>();
 

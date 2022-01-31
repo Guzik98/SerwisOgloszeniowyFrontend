@@ -23,7 +23,7 @@ const formSchema = object({
 const Address = ({ type }: TemplateTypeChild) => {
     const navigate = useNavigate();
     const { actions, state } = useStateMachine({ updateOffer });
-    console.log(type);
+    console.log(state.yourDetails.photo);
 
     const methods = useForm<IFormOfferAddress>({
         defaultValues: {

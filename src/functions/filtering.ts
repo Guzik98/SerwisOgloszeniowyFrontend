@@ -1,14 +1,11 @@
-import { useSettings } from '../Settings';
 import { OfferType } from '../types/offer';
 import { ExperienceLevelEnum } from '../enums/experience_level';
 import { ContractTypeEnum } from '../enums/contract-enum';
 import { SortByEnum } from '../enums/sortby-enum';
+import { filtersType } from '../types/filters';
 
-export const  filterFunction = (): OfferType[] | undefined => {
-    const { filters, offers } = useSettings();
+export const  filterFunction = (filters:  filtersType, offers:  OfferType[] | undefined): OfferType[] | undefined => {
     let filtered = offers;
-
-    console.log(filters.sortBy);
 
     if ( filters.mainTech !== 'All'){
         filtered = filtered?.filter((item) => {

@@ -34,7 +34,6 @@ const SortBy = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        console.log('here');
         setAnchorEl(event.currentTarget);
     };
 
@@ -49,7 +48,7 @@ const SortBy = () => {
         <>
             <ButtonComponent
                 onClick={handleClick}
-                height={ size.width > 102 ? '30px' : undefined }
+                height={ size.width > 1025 ? '30px' : undefined }
                 filter={ size.width < 1025 ? filters.sortBy == SortByEnum.LATEST : true }
                 childrens={ size.width > 1025 ?
                     <span className="sort-by-label">

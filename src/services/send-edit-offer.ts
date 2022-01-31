@@ -1,11 +1,16 @@
 import axios from 'axios';
 import { GlobalState } from '../pages/post-offer/state-machine/type';
 import { UpperCase } from '../functions/upperCase';
+import { SendOfferType } from '../enums/send-offer-type';
 
-export const sendEditedOffer = (data: GlobalState) => {
-    console.log(data);
-    const url = `http://localhost:3000/offer/${data.yourDetails._id}`;
-    console.log(url);
+export const sendEditOffer = (data: GlobalState, type: SendOfferType) => {
+    let url = '';
+    if (type === SendOfferType.POST) {
+        url = 'http://localhost:3000/offer';
+    } else {
+        url = `http://localhost:3000/offer/${data.yourDetails._id}`;
+    }
+
     const today = new Date().toISOString();
 
     axios.post(url,  {
@@ -35,9 +40,8 @@ export const sendEditedOffer = (data: GlobalState) => {
         skills: data.yourDetails.skills,
         experience_level: data.yourDetails.experience_level,
     }, {
-        headers: {
-            'Authorization': 'Bearer ' + (localStorage.getItem('accessToken') as string)
-        }
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
     }).then((response) => {
         console.log(response);
     }).catch((error) => {

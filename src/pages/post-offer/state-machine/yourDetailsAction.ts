@@ -15,7 +15,7 @@ export function updateOffer(
         name: string,
         surname: string,
         short_personal_description: string,
-        photo: File | undefined
+        photo: FileList | undefined
         photo_url: string | null
         street: string,
         city: string,

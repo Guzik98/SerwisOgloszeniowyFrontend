@@ -1,4 +1,5 @@
 export type IReactHookFormTextFieldProps ={
+    shrink?: boolean;
     label: string;
     name: string;
     type?: string

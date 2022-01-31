@@ -7,11 +7,12 @@ import { IFormOfferEducation } from '../../../types/forms/post-offer-types/IForm
 import { SubmitButtonStyled } from '../../../common/component-styles/SubmitButton';
 import { Button, Checkbox, FormControlLabel } from '@mui/material';
 import ReactHookFormTextField2 from '../../../common/components/RHookFormTextField2';
-import { array, object, string, date } from 'yup';
+import { array, date, object, string } from 'yup';
 import { useNavigate } from 'react-router-dom';
 import Template from '../../Template';
 import RHookFormDataPicker from '../../../common/components/RHookFormDataPicker';
 import { TemplateTypeChild } from '../../../types/forms/TemplateTypeChild';
+import { SendOfferType } from '../../../enums/send-offer-type';
 
 const eduSchema = object({
     school_name: string().required('This field is required'),
@@ -71,7 +72,7 @@ const Education = ({ type }: TemplateTypeChild) => {
     };
 
     useEffect(() => {
-        if ( state.yourDetails.education === null){
+        if ( type === SendOfferType.POST){
             append({ school_name: '', area: '', degree: '', start_date: new Date(), end_date: 'Till now' });
         }
     }, []);

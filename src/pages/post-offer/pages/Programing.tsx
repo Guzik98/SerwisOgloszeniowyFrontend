@@ -18,6 +18,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { red } from '@mui/material/colors';
 import { TemplateTypeChild } from '../../../types/forms/TemplateTypeChild';
 import { ExperienceLevelEnum } from '../../../enums/experience_level';
+import { SendOfferType } from '../../../enums/send-offer-type';
 
 
 const skillsSchema = object({
@@ -26,8 +27,8 @@ const skillsSchema = object({
 });
 
 const formSchema = object({
-    marker_icon: string().required(),
-    experience_level: string().required(),
+    marker_icon: string().required('This field is required'),
+    experience_level: string().required('This field is required'),
     language: array().of(skillsSchema)
 });
 
@@ -62,7 +63,7 @@ const Programing = ({ type }: TemplateTypeChild) => {
     };
 
     useEffect( () => {
-        if (type === 'postoffer') {
+        if (type === SendOfferType.POST) {
             append({ name: 'English', level: 'A2' });
         }
     }, []);

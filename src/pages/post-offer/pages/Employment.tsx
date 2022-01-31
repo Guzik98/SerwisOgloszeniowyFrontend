@@ -15,17 +15,17 @@ import { ContractInput } from './select-inputs/contract-input';
 import Template from '../../Template';
 import getLocation from '../../../services/get-location';
 import { GeocodeType } from '../../../types/geocode';
-import { sendOffer } from '../../../services/send-offer';
 import { sendProfilePhoto } from '../../../services/send-photo';
 import { EmploymentType } from '../../../types/offer/employment';
 import { TemplateTypeChild } from '../../../types/forms/TemplateTypeChild';
-import { sendEditedOffer } from '../../../services/send-edited-offer';
+import { SendOfferType } from '../../../enums/send-offer-type';
+import { sendEditOffer } from '../../../services/send-edit-offer';
 
 const employmentSchema = object({
     type: string().required('this is required'),
     salary: object({
-        from: number().min(1000).max(100000).required('this is required'),
-        to: number().min(1000).max(100000).required('this is required'),
+        from: number().min(1000, 'Min value 1000').max(100000, 'Max value 100000').required('this is required'),
+        to: number().min(1000, 'Min value 1000').max(100000, 'Max value 100000').required('this is required'),
         currency: string()
     }).optional().nullable()
 });
@@ -35,7 +35,6 @@ const formSchema = object({
 });
 
 const Employment = ({ type }: TemplateTypeChild) => {
-    console.log(type);
     const navigate = useNavigate();
 
     const { actions, state  } = useStateMachine({ updateOffer });
@@ -62,19 +61,26 @@ const Employment = ({ type }: TemplateTypeChild) => {
 
     const submit: SubmitHandler<IFormOfferEmployment> = (data: IFormOfferEmployment) => {
         setEmpType(data.employment_type);
-        getLocation(state.yourDetails.street + ', ' + state.yourDetails.city + ', ' + state.yourDetails.country_code, setGeocode);
-        if (state.yourDetails.photo !== undefined ) {
-            sendProfilePhoto(state.yourDetails.photo)
-                .then(response => { setUrl(response); } );
-        } else if ( state.yourDetails.photo_url !== null) {
-            setUrl('http://localhost:3000/profile/logo/default-avatar.jpg');
-        } else {
-            setUrl(state.yourDetails.photo_url!);
-        }
+        getLocation(state.yourDetails.street + ', ' + state.yourDetails.city + ', ' + state.yourDetails.country_code, setGeocode, navigate);
+            if (type === SendOfferType.EDIT) {
+                if ( state.yourDetails.photo && state.yourDetails.photo.length !== 0) {
+                    sendProfilePhoto(state.yourDetails.photo)
+                        .then(response => { setUrl(response); } );
+                }
+            } else {
+                if (  state.yourDetails.photo && state.yourDetails.photo.length !== 0 ) {
+                    sendProfilePhoto(state.yourDetails.photo)
+                        .then(response => { setUrl(response); } );
+                } else {
+                    setUrl('http://localhost:3000/profile/logo/default-avatar.jpg');
+                }
+            }
+
     };
 
     useEffect(() => {
         if ( geocode && url && empType && !checkFlow) {
+            console.log('here2');
             actions.updateOffer({
                 ...state.yourDetails,
                 photo_url: url,
@@ -88,19 +94,14 @@ const Employment = ({ type }: TemplateTypeChild) => {
 
     useEffect(() => {
             if (checkFlow && state.yourDetails.photo_url === url && state.yourDetails.latitude === geocode?.latitude && state.yourDetails.longitude == geocode?.longitude ){
-                if (type === 'postoffer') {
-                    sendOffer(state);
-                } else {
-                    sendEditedOffer(state);
-                }
+                sendEditOffer(state, type);
                 navigate('/mainpage');
             }
     },  [checkFlow, actions.updateOffer]);
 
     useEffect(() => {
-        if (type === 'postoffer'){
-            append({ type: ContractTypeEnum.PERMANENT, salary: null });
-            setCheck( [true, true, true]);
+        if (type === SendOfferType.POST){
+            append({ type: ContractTypeEnum.PERMANENT, salary: { from: 1000, to: 10000, currency: 'PLN' } });
         }
     }, []);
 

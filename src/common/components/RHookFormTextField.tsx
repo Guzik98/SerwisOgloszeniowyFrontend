@@ -3,7 +3,7 @@ import { TextField } from '@mui/material';
 import { FC } from 'react';
 import { IReactHookFormTextFieldProps } from '../../types/forms/buttons/ReactHookFormTextFieldProps';
 
-const ReactHookFormTextField: FC<IReactHookFormTextFieldProps> = ({ label, name, type, rows, multiline, required, defaultValue }: IReactHookFormTextFieldProps) => {
+const ReactHookFormTextField: FC<IReactHookFormTextFieldProps> = ({ label, name, type, rows, multiline, required, defaultValue, shrink }: IReactHookFormTextFieldProps) => {
     const {
         register,
         formState: { errors },
@@ -11,6 +11,7 @@ const ReactHookFormTextField: FC<IReactHookFormTextFieldProps> = ({ label, name,
 
     return (
         <TextField
+            InputLabelProps={{ shrink: shrink }}
             multiline={multiline}
             rows={rows}
             label={label}

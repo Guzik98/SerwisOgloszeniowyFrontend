@@ -11,6 +11,7 @@ import { Button } from '@mui/material';
 import { SubmitButtonStyled } from '../../../common/component-styles/SubmitButton';
 import Template from '../../Template';
 import { TemplateTypeChild } from '../../../types/forms/TemplateTypeChild';
+import { SendOfferType } from '../../../enums/send-offer-type';
 
 const projectSchema = object({
     project_name: string().required('this field is required'),
@@ -53,7 +54,7 @@ const Projects = ({ type }: TemplateTypeChild) => {
     };
 
     useEffect(() => {
-        if (state.yourDetails.project === null){
+        if ( type === SendOfferType.POST ){
             append({ project_name: '', description:'' });
         }
     }, []);

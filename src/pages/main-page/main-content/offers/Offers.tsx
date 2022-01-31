@@ -17,7 +17,7 @@ import { deleteOffer } from '../../../../services/delete-offer';
 const Offers = ({ filtered, setOfferDetailData }: { filtered: OfferType[], setOfferDetailData: React.Dispatch<React.SetStateAction<OfferType | undefined>> }) => {
     const size: ScreenSize = useWindowSize();
     const navigate = useNavigate();
-    const { filters, setFilters, offers } = useSettings();
+    const { filters, setFilters, offers, setOffers } = useSettings();
     const { userData } = useAuth();
 
     const style = {
@@ -113,7 +113,7 @@ const Offers = ({ filtered, setOfferDetailData }: { filtered: OfferType[], setOf
                                                      <AddIcon onClick={ () => navigate('/edit',  { state: { ...item } }) } />
                                                      <RemoveIcon onClick={ () => {
                                                          console.log('here');
-                                                         deleteOffer(item._id);
+                                                         deleteOffer(item._id, setOffers);
                                                          offers?.map((filter) => {
                                                              return filter._id !== item._id;
                                                          });

@@ -13,6 +13,7 @@ import Employment from './pages/Employment';
 import Programing from './pages/Programing';
 import { OfferType } from '../../types/offer';
 import { updateOffer } from './state-machine/yourDetailsAction';
+import { SendOfferType } from '../../enums/send-offer-type';
 
 const EditOffer = (): JSX.Element => {
     const navigate = useNavigate();
@@ -31,16 +32,16 @@ const EditOffer = (): JSX.Element => {
 
     return (
         <Routes>
-            <Route path="personalinfo" element={<PersonalInfo type={'edit'} />} />
-            <Route path="address" element={<Address type={'edit'}/>} />
-            <Route path="contact" element={<Contact type={'edit'} />} />
-            <Route path="education" element={<Education type={'edit'} />} />
-            <Route path="courses" element={<Courses type={'edit'} />} />
-            <Route path="experience" element={<Experience type={'edit'} />} />
-            <Route path="project" element={<Projects type={'edit'}/>} />
-            <Route path="programing" element={<Programing type={'edit'} />} />
-            <Route path="skills" element={<Skills type={'edit'} />} />
-            <Route path="employment" element={<Employment  type={'edit'} />} />
+            <Route path="personalinfo" element={<PersonalInfo type={SendOfferType.EDIT} />} />
+            <Route path="address" element={<Address type={SendOfferType.EDIT}/>} />
+            <Route path="contact" element={<Contact type={SendOfferType.EDIT} />} />
+            <Route path="education" element={<Education type={SendOfferType.EDIT} />} />
+            <Route path="courses" element={<Courses type={SendOfferType.EDIT} />} />
+            <Route path="experience" element={<Experience type={SendOfferType.EDIT} />} />
+            <Route path="project" element={<Projects type={SendOfferType.EDIT}/>} />
+            <Route path="programing" element={<Programing type={SendOfferType.EDIT} />} />
+            <Route path="skills" element={<Skills type={SendOfferType.EDIT} />} />
+            <Route path="employment" element={<Employment  type={SendOfferType.EDIT} />} />
         </Routes>
     );
 };

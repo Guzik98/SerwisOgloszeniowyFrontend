@@ -1,9 +1,8 @@
 import React from 'react';
 import { useWindowSize } from '../functions/handle-resize';
 import { ScreenSize } from '../types/ScreenSize';
-import { TemplateType } from '../types/forms/TemplateType';
 
-const Template = ({ header, p, children }: TemplateType) => {
+const Template = ({ header, p, children }: { header: string, p?: string, children: JSX.Element }) => {
     const size: ScreenSize = useWindowSize();
     const style = {
         maxHeight: size.height - 200,

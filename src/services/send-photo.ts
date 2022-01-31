@@ -1,15 +1,14 @@
 import axios from 'axios';
 
-export const sendProfilePhoto = async ( data: File ):  Promise<string> => {
+export const sendProfilePhoto = async (data: FileList):  Promise<string> => {
 
     const formData = new FormData();
-    formData.append('file', data);
+    formData.append('file', data[0]);
     let companyLogoUrl = 'http://localhost:3000/profile/logo/';
-     await axios.post('http://localhost:3000/photo/upload', formData,
+    await axios.post('http://localhost:3000/photo/upload', formData,
         {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
         }).then((r) => {
         companyLogoUrl = companyLogoUrl + r.data;
     });

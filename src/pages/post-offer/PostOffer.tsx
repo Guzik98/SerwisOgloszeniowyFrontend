@@ -14,6 +14,7 @@ import Programing from './pages/Programing';
 import { updateOffer } from './state-machine/yourDetailsAction';
 import { ExperienceLevelEnum } from '../../enums/experience_level';
 import { useAuth } from '../../AuthContext';
+import { SendOfferType } from '../../enums/send-offer-type';
 
 const PostOffer = (): JSX.Element => {
     const { userData } = useAuth();
@@ -53,16 +54,16 @@ const PostOffer = (): JSX.Element => {
 
     return (
             <Routes>
-                <Route path="personalinfo" element={<PersonalInfo type={'postoffer'}/>}/>
-                <Route path="address" element={<Address type={'postoffer'}/>} />
-                <Route path="contact" element={<Contact type={'postoffer'}/>} />
-                <Route path="education" element={<Education type={'postoffer'} />} />
-                <Route path="courses" element={<Courses type={'postoffer'}/>} />
-                <Route path="experience" element={<Experience type={'postoffer'} />} />
-                <Route path="project" element={<Projects type={'postoffer'}/>} />
-                <Route path="programing" element={<Programing type={'postoffer'}/>} />
-                <Route path="skills" element={<Skills type={'postoffer'} />} />
-                <Route path="employment" element={<Employment type={'postoffer'} />} />
+                <Route path="personalinfo" element={<PersonalInfo type={SendOfferType.POST}/>}/>
+                <Route path="address" element={<Address type={SendOfferType.POST}/>} />
+                <Route path="contact" element={<Contact type={SendOfferType.POST}/>} />
+                <Route path="education" element={<Education type={SendOfferType.POST} />} />
+                <Route path="courses" element={<Courses type={SendOfferType.POST}/>} />
+                <Route path="experience" element={<Experience type={SendOfferType.POST} />} />
+                <Route path="project" element={<Projects type={SendOfferType.POST}/>} />
+                <Route path="programing" element={<Programing type={SendOfferType.POST}/>} />
+                <Route path="skills" element={<Skills type={SendOfferType.POST} />} />
+                <Route path="employment" element={<Employment type={SendOfferType.POST} />} />
             </Routes>
     );
 };

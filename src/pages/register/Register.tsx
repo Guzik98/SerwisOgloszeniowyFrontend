@@ -28,7 +28,7 @@ const Register: FC = () => {
     };
 
     useEffect(() => {
-        if (errorMessageFromBackend === 'register'){
+        if (errorMessageFromBackend === 'success'){
             navigate('/login');
         }
     }, [errorMessageFromBackend]);

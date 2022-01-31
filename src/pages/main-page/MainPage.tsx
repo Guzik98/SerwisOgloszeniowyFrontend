@@ -4,6 +4,7 @@ import FilterBar from './filter-bar/FilterBar';
 import Content from './main-content/Content';
 
 const MainPage = () => {
+
     return (
         <div className="main-page" style={{ width: '100vw', height: '100vh' }}>
             <Header/>

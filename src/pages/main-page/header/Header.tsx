@@ -7,9 +7,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { StyledDivider } from '../../../common/component-styles/Divider';
 import { UpperCase } from '../../../functions/upperCase';
+import { logoutUser } from '../../../services/logout';
 
 const Header = (): JSX.Element => {
-    const { username, loggedIn, logout } = useAuth();
+    const { userData, setUserData } = useAuth();
     const navigate = useNavigate();
 
     return (
@@ -24,17 +25,20 @@ const Header = (): JSX.Element => {
                     #1 Job Board for IT industry in Poland
                 </div>
                 <div className='left-end'>
-                    { loggedIn &&
+                    { userData.loggedIn &&
                         <>
                             <StyledDivider  orientation="vertical" flexItem/>
-                            <SubmitButtonStyled onClick={() => logout() }>Log out</SubmitButtonStyled>
+                            <SubmitButtonStyled onClick={() => {
+                                logoutUser(setUserData);
+                            }
+                            }>Log out</SubmitButtonStyled>
                         </>
                     }
                     <StyledDivider  orientation="vertical" flexItem/>
-                    { username
-                        ? <SubmitButtonStyled >{ UpperCase(username) }</SubmitButtonStyled>
+                    { userData.loggedIn
+                        ? <SubmitButtonStyled >{ UpperCase(userData.username) }</SubmitButtonStyled>
                         : <SubmitButtonStyled onClick={() => navigate('/login')}>Sign in</SubmitButtonStyled>}
-                    { loggedIn &&
+                    { userData.loggedIn &&
                         <>
                             <StyledDivider orientation="vertical" flexItem/>
                             <SubmitButtonStyled onClick={() =>  navigate('/postoffer')}>

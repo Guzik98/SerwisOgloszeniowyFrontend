@@ -7,6 +7,7 @@ export const deleteOffer = (_id: string) => {
             'Authorization': 'Bearer ' + (localStorage.getItem('accessToken') as string)
         }
     }).then(() => {
+
     }).catch((error) => {
         console.log(error);
     });

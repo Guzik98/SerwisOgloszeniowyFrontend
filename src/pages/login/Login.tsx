@@ -8,9 +8,9 @@ import '../form-style.sass';
 import {  loginRequest } from '../../services/login-request';
 import { SubmitButtonStyled } from '../../common/component-styles/SubmitButton';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../AuthContext';
 import { IFormLoginProps } from '../../types/forms/IFormLoginProps';
 import Template from '../Template';
+import { useAuth } from '../../AuthContext';
 
 const formSchema = object({
     email: string().email().required('Email is required'),
@@ -18,8 +18,8 @@ const formSchema = object({
 });
 
 const Login: FC = () => {
+    const { setUserData } = useAuth();
     const navigate = useNavigate();
-    const { login } = useAuth();
     const [errorMessageFromBackend, setErrorMessageFromBackend] = useState<string>();
 
     const methods = useForm<IFormLoginProps>({
@@ -27,12 +27,11 @@ const Login: FC = () => {
     });
 
     const submit: SubmitHandler<IFormLoginProps> = async (data: IFormLoginProps) => {
-        loginRequest(data.email, data.password, setErrorMessageFromBackend);
+        loginRequest(data.email, data.password, setErrorMessageFromBackend, setUserData);
     };
 
     useEffect(() => {
         if (errorMessageFromBackend === 'logged'){
-            login();
             navigate('/');
         }
     }, [errorMessageFromBackend]);

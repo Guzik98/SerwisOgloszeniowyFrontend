@@ -16,7 +16,7 @@ import { ExperienceLevelEnum } from '../../enums/experience_level';
 import { useAuth } from '../../AuthContext';
 
 const PostOffer = (): JSX.Element => {
-    const { username, email } = useAuth();
+    const { userData } = useAuth();
     const navigate = useNavigate();
     const { actions } = useStateMachine({ updateOffer });
 
@@ -28,7 +28,7 @@ const PostOffer = (): JSX.Element => {
             city: '',
             country_code: 'PL',
             education: null,
-            email: email!,
+            email: userData.email,
             employment_type: [],
             experience: null,
             experience_level: ExperienceLevelEnum.JUNIOR,
@@ -38,7 +38,7 @@ const PostOffer = (): JSX.Element => {
             linkedin_url: null,
             longitude: '',
             marker_icon: '',
-            name: username!,
+            name: userData.username,
             phone_number: 0,
             photo: undefined,
             photo_url: null,

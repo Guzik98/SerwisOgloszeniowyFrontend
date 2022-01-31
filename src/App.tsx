@@ -9,10 +9,10 @@ import MainPage from './pages/main-page/MainPage';
 import EditOffer from './pages/post-offer/EditOffer';
 
 function App() {
-    const { loggedIn } = useAuth();
+    const { userData } = useAuth();
 
     const RequireAuth = () => {
-        if (!loggedIn) {
+        if (!userData.loggedIn) {
             return <Navigate to="/login" />;
         }
         return <Outlet />;

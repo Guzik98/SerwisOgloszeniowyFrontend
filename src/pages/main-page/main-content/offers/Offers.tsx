@@ -18,7 +18,7 @@ const Offers = ({ filtered, setOfferDetailData }: { filtered: OfferType[], setOf
     const size: ScreenSize = useWindowSize();
     const navigate = useNavigate();
     const { filters, setFilters, offers } = useSettings();
-    const { loggedIn, email } = useAuth();
+    const { userData } = useAuth();
 
     const style = {
         minHeight: size.height - 200,
@@ -72,7 +72,7 @@ const Offers = ({ filtered, setOfferDetailData }: { filtered: OfferType[], setOf
                     >
                         All offers
                     </div>
-                    { loggedIn &&
+                    { userData.loggedIn &&
                     <div
                         className={`${tabUserOffersActive.userOffers ? 'tab-active offers' : 'offers'}`}
                         onClick={() => {
@@ -97,7 +97,7 @@ const Offers = ({ filtered, setOfferDetailData }: { filtered: OfferType[], setOf
                 {
                      tabUserOffersActive.userOffers ?
                          offers?.map((item) => {
-                             if (item.owner === email ){
+                             if (item.owner === userData.email ){
                                  return item.employment_type.map((propsEmployment, index) => {
                                      if (index === 0) {
                                          return (

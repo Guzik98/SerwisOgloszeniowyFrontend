@@ -1,40 +1,21 @@
 import { createContext, FC, useContext, useEffect, useState } from 'react';
 import { OfferType } from './types/offer';
 import { filtersType } from './types/filters';
-import { ExperienceLevelEnum } from './enums/experience_level';
-import { ContractTypeEnum } from './enums/contract-enum';
 import { View } from './types/view';
-import axios from 'axios';
-import { SortByEnum } from './enums/sortby-enum';
+import { getOffers } from './services/get-offers';
+import { filtersDefault } from './deflautValues/filters-default';
+import { viewPortDefault } from './deflautValues/view-port-default';
 
 export const SettingsContext = createContext<SettingsContextData | null>(null);
 
 const useProviderSettings = () => {
 
     const [ offers, setOffers ] = useState<OfferType[]>();
-    const [ filters, setFilters] = useState<filtersType>({
-        city: 'All',
-        mainTech: 'All',
-        seniority: ExperienceLevelEnum.ALL,
-        fromSalary: 0,
-        toSalary: 100000,
-        employmentType: ContractTypeEnum.ALL,
-        sortBy: SortByEnum.LATEST,
-        withSalary: false
-    });
-    const [ viewport, setViewport ] = useState<View>({
-        latitude: 52.237049,
-        longitude: 21.017532,
-        width: '100%',
-        height: '98%',
-        zoom: 5,
-    });
+    const [ filters, setFilters] = useState<filtersType>(filtersDefault);
+    const [ viewport, setViewport ] = useState<View>(viewPortDefault);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/offer')
-            .then((response) => {
-                return setOffers(response.data);
-            });
+        getOffers(setOffers);
     }, []);
 
     return {

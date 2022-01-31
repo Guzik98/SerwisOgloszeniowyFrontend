@@ -1,15 +1,24 @@
 import axios from 'axios';
 import React from 'react';
+import { checkUser } from './check-user';
+import { UserType } from '../types/user';
 
-export const loginRequest =  ( email: string, password: string,
-                             setErrorMessageFromBackend: React.Dispatch<React.SetStateAction<string | undefined>> ) => {
+export const loginRequest =  (
+    email: string,
+    password: string,
+    setErrorMessageFromBackend: React.Dispatch<React.SetStateAction<string | undefined>>,
+    setUserData: React.Dispatch<React.SetStateAction<UserType>>
+) => {
     const url = 'http://localhost:3000/auth/signin';
      axios.post(url,  {
         email: email,
         password: password
-    })
-    .then( (response) => {
-        localStorage.setItem('accessToken', response.data.accessToken);
+    }, {
+         headers: { 'Content-Type': 'application/json' },
+         withCredentials: true,
+     })
+    .then(() => {
+        checkUser(setUserData);
         setErrorMessageFromBackend('logged');
     })
     .catch( (error) => {

@@ -48,7 +48,6 @@ const PostOffer = (): JSX.Element => {
             skills: [],
             street: '',
             surname: ''
-
         });
     }, []);
 

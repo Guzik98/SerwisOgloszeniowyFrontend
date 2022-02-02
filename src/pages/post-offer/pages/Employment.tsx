@@ -75,7 +75,6 @@ const Employment = ({ type }: TemplateTypeChild) => {
                     setUrl('http://localhost:3000/profile/logo/default-avatar.jpg');
                 }
             }
-
     };
 
     useEffect(() => {
